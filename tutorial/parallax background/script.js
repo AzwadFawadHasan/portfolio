@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');//creates instance of builtin canvas 2d api 
 const CANVAS_WIDTH = canvas.width = 800;
 const CANVAS_HEIGHT = canvas.height = 700;
 
-let gameSpeed = 5;
+let gameSpeed = 15;
 const backgroundLayer1 = new Image();
 backgroundLayer1.src =  'backgroundLayers\\layer-1.png';
 const backgroundLayer2 = new Image();
@@ -22,7 +22,9 @@ let x =0;//serves as horizontal position for one of the background images
 function animate(){
     ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     ctx.drawImage(backgroundLayer4,x,0);
-    x--;
+    
+    if(x<-1000)x=0;
+    else x-=gameSpeed;
     requestAnimationFrame(animate);
 
 }
