@@ -5,3 +5,13 @@
     left:50%;
     transform: translate(-50%, -50%);
 }
+
+.controls{
+    position:absolute;
+   
+
+}
+
+.controls, select, option {
+    font-size: 25px;
+}
