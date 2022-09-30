@@ -19,6 +19,7 @@ const enemiesArray =[];
 
 const enemyImage = new Image();
 enemyImage.src = 'enemiesSpriteImages\\enemy1.png';
+let gameFrame =0;
 
 
 class Enemy{
@@ -43,8 +44,14 @@ class Enemy{
         this.y+= this.speed;
         //cycle throught all frames in sprite image to animate the enemy character
 
-        this.frame > 4 ? this.frame =0 : this.frame++;//this is alternative to if else statement
-        //this is called ES6 ternary operator. shortens code 
+        if (gameFrame % 2 ===0){
+            //this if statement basically runs the code two times in everyloop
+            // this basically helps to slow down the animation frame rate
+            this.frame > 4 ? this.frame =0 : this.frame++;//this is alternative to if else statement
+            //this is called ES6 ternary operator. shortens code 
+        }
+
+        
 
     }
     draw(){//draws enemey on canvas
@@ -79,6 +86,8 @@ function animate(){
     });//for Each simply calls provided call back function for each element in the array
     //ctx.fillRect(enemy1.x, enemy1.y, enemy1.width, enemy1.height);//filling rectanle with enemy1 properties
     //ctx.fillRect(enemy2.x, enemy2.y, enemy2.width, enemy2.height);
+    
+    gameFrame++;
     requestAnimationFrame(animate);
 }
 
