@@ -16,15 +16,20 @@ backgroundLayer4.src =  'backgroundLayers\\layer-4.png';
 const backgroundLayer5 = new Image();
 backgroundLayer5.src =  'backgroundLayers\\layer-5.png';
 
-
+let z=0;
 let x =0;//serves as horizontal position for one of the background images
-
+let x2 =2400;//x2 for second identical image
+//2400 is the image width(full)
 function animate(){
     ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     ctx.drawImage(backgroundLayer4,x,0);
-    
-    if(x<-1000)x=0;
-    else x-=gameSpeed;
+    ctx.drawImage(backgroundLayer4,x2,0);
+    //x2 starts where the first image ends
+    if(x<-2400)x=2400-gameSpeed;//reset check
+    //when x becomes 2400 x2 reduces by 15 pixels
+    else x-=-gameSpeed;
+    if(x2<-2400)x2=2400 -gameSpeed;
+    else x2-= gameSpeed;
     requestAnimationFrame(animate);
 
 }
