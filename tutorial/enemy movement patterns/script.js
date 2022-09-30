@@ -20,15 +20,20 @@ const enemiesArray =[];
 const enemyImage = new Image();
 enemyImage.src = 'enemiesSpriteImages\\enemy1.png';
 
+
 class Enemy{
     constructor(){
         this.x=Math.random() * canvas.width;//to randomize the position of enemy
         //this.y=50;
         this.y = Math.random() * canvas.height;
-        this.width=100;
-        this.height=100;
+        
         this.speed = Math.random() * 4 -2; //creates a random number from 0-4 but we are pushing the range to start from -2 
         //so we are also getting enemeies who moves left and right both
+        this.spriteWidth =293;//293 is the width of a single frame of enemyimage1
+
+        this.spriteHeight = 155// likewise as before
+        this.width=this.spriteWidth/2.5;
+        this.height=this.spriteHeight/ 2.5;
     }           
     update(){//moves the enemy in the canvas
         this.x+= this.speed;
@@ -37,7 +42,9 @@ class Enemy{
     }
     draw(){//draws enemey on canvas
         ctx.strokeRect(this.x, this.y, this.width, this.height);
-        ctx.drawImage(enemyImage, this.x, this.y);
+        //ctx.drawImage(enemyImage, this.x, this.y);
+        //cropping out area from spirtesheet
+        ctx.drawImage(enemyImage, 0,0, this.spriteWidth, this.spriteHeight,this.x, this.y, this.width, this.height);
 
     }
 }
