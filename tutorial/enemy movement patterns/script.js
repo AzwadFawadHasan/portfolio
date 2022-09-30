@@ -14,6 +14,12 @@ enemy1 ={
 }*/
 const numberOfEnemies=100;
 const enemiesArray =[];
+
+
+
+const enemyImage = new Image();
+enemyImage.src = 'enemiesSpriteImages\\enemy1.png';
+
 class Enemy{
     constructor(){
         this.x=Math.random() * canvas.width;//to randomize the position of enemy
@@ -31,6 +37,7 @@ class Enemy{
     }
     draw(){//draws enemey on canvas
         ctx.strokeRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(enemyImage, this.x, this.y);
 
     }
 }
