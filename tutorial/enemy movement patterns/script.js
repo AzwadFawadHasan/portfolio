@@ -34,17 +34,24 @@ class Enemy{
         this.spriteHeight = 155// likewise as before
         this.width=this.spriteWidth/2.5;
         this.height=this.spriteHeight/ 2.5;
+
+        this.frame =0;
+
     }           
     update(){//moves the enemy in the canvas
         this.x+= this.speed;
         this.y+= this.speed;
+        //cycle throught all frames in sprite image to animate the enemy character
+
+        this.frame > 4 ? this.frame =0 : this.frame++;//this is alternative to if else statement
+        //this is called ES6 ternary operator. shortens code 
 
     }
     draw(){//draws enemey on canvas
         ctx.strokeRect(this.x, this.y, this.width, this.height);
         //ctx.drawImage(enemyImage, this.x, this.y);
         //cropping out area from spirtesheet
-        ctx.drawImage(enemyImage, 0,0, this.spriteWidth, this.spriteHeight,this.x, this.y, this.width, this.height);
+        ctx.drawImage(enemyImage, this.frame * this.width,0, this.spriteWidth, this.spriteHeight,this.x, this.y, this.width, this.height);
 
     }
 }
