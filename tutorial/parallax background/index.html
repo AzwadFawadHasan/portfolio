@@ -9,7 +9,12 @@
     </title>
 </head>
 <body>
-    <canvas id="canvas1"></canvas>
+    <div id="container">
+        <canvas id="canvas1"></canvas>
+        <p> Game speed: <span id='showGameSpeed'></span></p>
+        <input type="range" min ="0" max="20" value="5" class="slider" id="slider">
+    </div>
+    
     <!--use 1515px as width for full scren-->
     <script src="script.js"></script>
 </body>

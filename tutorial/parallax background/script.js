@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');//creates instance of builtin canvas 2d api 
 const CANVAS_WIDTH = canvas.width = 800;
 const CANVAS_HEIGHT = canvas.height = 700;
 
-let gameSpeed = 5;
+let gameSpeed = 4;
 const backgroundLayer1 = new Image();
 backgroundLayer1.src =  'backgroundLayers\\layer-1.png';
 const backgroundLayer2 = new Image();
@@ -16,11 +16,20 @@ backgroundLayer4.src =  'backgroundLayers\\layer-4.png';
 const backgroundLayer5 = new Image();
 backgroundLayer5.src =  'backgroundLayers\\layer-5.png';
 
-let z=0;
-let x =0;//serves as horizontal position for one of the background images
-let x2 =2400;//x2 for second identical image
+//let z=0;
+//let x =0;//serves as horizontal position for one of the background images
+//let x2 =2400;//x2 for second identical image
 //2400 is the image width(full)
 
+const slider = document.getElementById('slider');
+slider.value= gameSpeed;
+const showGameSpeed = document.getElementById('showGameSpeed');//taking the span element    
+showGameSpeed.innerHTML =gameSpeed;
+slider.addEventListener('change', function(e){
+    //console.log(e, target.value);
+    gameSpeed = e.target.value;
+    showGameSpeed.innerHTML = e.target.value;
+});
 
 class Layer{
     constructor(image, speedModifier){
