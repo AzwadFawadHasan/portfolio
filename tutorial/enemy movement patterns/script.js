@@ -12,42 +12,47 @@ enemy1 ={
     height:200,
 
 }*/
-const numberOfEnemies=100;
+const numberOfEnemies=10;
 const enemiesArray =[];
 
 
 
-const enemyImage = new Image();
-enemyImage.src = 'enemiesSpriteImages\\enemy1.png';
+//const enemyImage = new Image();
+//enemyImage.src = 'enemiesSpriteImages\\enemy1.png';
 let gameFrame =0;
 
 
 class Enemy{
     constructor(){
-        this.x=Math.random() * canvas.width;//to randomize the position of enemy
-        //this.y=50;
-        this.y = Math.random() * canvas.height;
         
-        this.speed = Math.random() * 4 -2; //creates a random number from 0-4 but we are pushing the range to start from -2 
+        //this.y=50;
+        
+        this.image = new Image();
+        this.image.src='enemiesSpriteImages\\enemy1.png';
+        
+        //this.speed = Math.random() * 4 -2; //creates a random number from 0-4 but we are pushing the range to start from -2 
         //so we are also getting enemeies who moves left and right both
         this.spriteWidth =293;//293 is the width of a single frame of enemyimage1
 
         this.spriteHeight = 155// likewise as before
         this.width=this.spriteWidth/2.5;
+        this.x=Math.random() * (canvas.width-this.width);//to randomize the position of enemy
         this.height=this.spriteHeight/ 2.5;
+        this.y = Math.random() * (canvas.height-this.height);
 
         this.frame =0;
+        this.flapSpeed = Math.floor(Math.random() *50 +1);
 
     }           
     update(){//moves the enemy in the canvas
-        this.x+= this.speed;
-        this.y+= this.speed;
+        this.x+= Math.random()*15 -7.5;
+        this.y+= Math.random()*10 -5;
         //cycle throught all frames in sprite image to animate the enemy character
 
-        if (gameFrame % 2 ===0){
+        if (gameFrame % this.flapSpeed ===0){
             //this if statement basically runs the code two times in everyloop
             // this basically helps to slow down the animation frame rate
-            this.frame > 4 ? this.frame =0 : this.frame++;//this is alternative to if else statement
+            this.frame > 4 ? this.frame = 0 : this.frame++;//this is alternative to if else statement
             //this is called ES6 ternary operator. shortens code 
         }
 
@@ -55,10 +60,10 @@ class Enemy{
 
     }
     draw(){//draws enemey on canvas
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
+        //ctx.strokeRect(this.x, this.y, this.width, this.height);
         //ctx.drawImage(enemyImage, this.x, this.y);
         //cropping out area from spirtesheet
-        ctx.drawImage(enemyImage, this.frame * this.width,0, this.spriteWidth, this.spriteHeight,this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.image, this.frame * this.width,0, this.spriteWidth, this.spriteHeight,this.x, this.y, this.width, this.height);
 
     }
 }
