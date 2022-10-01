@@ -12,7 +12,7 @@ enemy1 ={
     height:200,
 
 }*/
-const numberOfEnemies=20;
+const numberOfEnemies=25;
 const enemiesArray =[];
 
 
@@ -48,13 +48,15 @@ class Enemy{
         //this.angle = Math.random()*2;
         this.angle =0;
         this.angleSpeed = Math.random() *0.2;
+        this.curve = Math.random()*7;
+
 
     }           
     update(){//moves the enemy in the canvas
         //this.x+= Math.random()*15 -7.5;
         //this.speed = gameSpeed - this.gameSpeed;
         this.x-=this.speed;
-        this.y+=3* Math.sin(this.angle);//multiplying with 3 makes the sine curve more promineit
+        this.y+=this.curve* Math.sin(this.angle);//multiplying with 3 makes the sine curve more promineit
         this.angle+=this.angleSpeed;
         //this.y+= Math.floor(Math.random() *5 -2.5);
         if (this.x + this.width < 0)this.x=canvas.width; //this will make sure that when enemy crosses the border it respawns again in the canvas 
