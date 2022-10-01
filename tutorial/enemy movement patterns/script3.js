@@ -28,16 +28,16 @@ class Enemy{
         //this.y=50;
         
         this.image = new Image();
-        this.image.src='enemiesSpriteImages\\enemy3v2.jpg';
+        this.image.src='enemiesSpriteImages\\enemy3.png';
         
         this.speed = Math.random() * 5 -1; //creates a random number from 0-4 but we are pushing the range to start from -2 
         //so we are also getting enemeies who moves left and right both
-        this.spriteWidth =152.5;//293 is the width of a single frame of enemyimage1
+        this.spriteWidth =218;//293 is the width of a single frame of enemyimage1
 
-        this.spriteHeight = 123;// 155 was the height of the first framelikewise as before
-        this.width=this.spriteWidth;///2.5;
+        this.spriteHeight = 177;// 155 was the height of the first framelikewise as before
+        this.width=Math.floor(this.spriteWidth);///2.5;
         
-        this.height=this.spriteHeight;/// 2.5;
+        this.height=Math.floor(this.spriteHeight);/// 2.5;
 
         this.x=Math.random() * (canvas.width-this.width);//to randomize the position of enemy
         this.y = Math.random() * (canvas.height-this.height);
@@ -47,15 +47,15 @@ class Enemy{
 
         //this.angle = Math.random()*2;
         this.angle =0;
-        this.angleSpeed = Math.random() *0.2;
-        this.curve = Math.random()*7;
+        this.angleSpeed = Math.random() *2;
+        this.curve = Math.random()*200;
 
 
     }           
     update(){//moves the enemy in the canvas
         //this.x+= Math.random()*15 -7.5;
         //this.speed = gameSpeed - this.gameSpeed;
-        //this.x-=this.speed;
+        this.x= this.curve * Math.sin(this.angle*Math.PI/180) + (canvas.width/2 - this.width);//values cycle to + and - 200 because of Math.sin as it returns a value between -1 and +1. Hence -200 to +200 because of this.curve 
         //this.y+=this.curve* Math.sin(this.angle);//multiplying with 3 makes the sine curve more promineit
         this.angle+=this.angleSpeed;
         //this.y+= Math.floor(Math.random() *5 -2.5);
