@@ -50,7 +50,8 @@ class Enemy{
         //this.x+= Math.random()*15 -7.5;
         //this.speed = gameSpeed - this.gameSpeed;
         this.x-=this.speed;
-        this.y+= Math.floor(Math.random() *5 -2.5);
+        //this.y+= Math.floor(Math.random() *5 -2.5);
+        if (this.x + this.width < 0)this.x=canvas.width; //this will make sure that when enemy crosses the border it respawns again in the canvas
         //cycle throught all frames in sprite image to animate the enemy character
 
         if (gameFrame % this.flapSpeed ===0){
