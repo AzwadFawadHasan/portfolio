@@ -28,13 +28,13 @@ class Enemy{
         //this.y=50;
         
         this.image = new Image();
-        this.image.src='enemiesSpriteImages\\enemy3.png';
+        this.image.src='enemiesSpriteImages\\enemy4.png';
         
         this.speed = Math.random() * 5 -1; //creates a random number from 0-4 but we are pushing the range to start from -2 
         //so we are also getting enemeies who moves left and right both
-        this.spriteWidth =218;//293 is the width of a single frame of enemyimage1
+        this.spriteWidth =213;//293 is the width of a single frame of enemyimage1
 
-        this.spriteHeight = 177;// 155 was the height of the first framelikewise as before
+        this.spriteHeight = 213;// 155 was the height of the first framelikewise as before
         this.width=this.spriteWidth;///2.5;
         
         this.height=this.spriteHeight;/// 2.5;
