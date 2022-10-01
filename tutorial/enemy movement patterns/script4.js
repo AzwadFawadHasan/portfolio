@@ -48,6 +48,8 @@ class Enemy{
         this.frame =0;
         this.flapSpeed = Math.floor(Math.random() * 3 + 1);
 
+        this.interval = Math.floor(Math.random() * 200 +50);
+
       
 
 
@@ -55,7 +57,7 @@ class Enemy{
     update(){//moves the enemy in the canvas
         //this.x+= Math.random()*15 -7.5;
         //this.speed = gameSpeed - this.gameSpeed;
-        if(gameFrame %60 ===0){
+        if(gameFrame %this.interval ===0){
             this.newX = Math.random() * (canvas.width-this.width);//to randomize the position of enemy
             this.newY = Math.random() * (canvas.height-this.height) ;
         }
