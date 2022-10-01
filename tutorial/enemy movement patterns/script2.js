@@ -12,7 +12,7 @@ enemy1 ={
     height:200,
 
 }*/
-const numberOfEnemies=10;
+const numberOfEnemies=20;
 const enemiesArray =[];
 
 
@@ -24,7 +24,7 @@ let gameFrame =0;
 
 class Enemy{
     constructor(){
-        
+        //Math.sin() returns the sine of a number we pass to it. That number represents angle values in radions between -1 and +1
         //this.y=50;
         
         this.image = new Image();
@@ -43,15 +43,21 @@ class Enemy{
         this.y = Math.random() * (canvas.height-this.height);
 
         this.frame =0;
-        this.flapSpeed = Math.floor(Math.random() * 50 + 1);
+        this.flapSpeed = Math.floor(Math.random() * 1000 - 100);
+
+        //this.angle = Math.random()*2;
+        this.angle =0;
+        this.angleSpeed = Math.random() *0.2;
 
     }           
     update(){//moves the enemy in the canvas
         //this.x+= Math.random()*15 -7.5;
         //this.speed = gameSpeed - this.gameSpeed;
         this.x-=this.speed;
+        this.y+=3* Math.sin(this.angle);//multiplying with 3 makes the sine curve more promineit
+        this.angle+=this.angleSpeed;
         //this.y+= Math.floor(Math.random() *5 -2.5);
-        if (this.x + this.width < 0)this.x=canvas.width; //this will make sure that when enemy crosses the border it respawns again in the canvas
+        if (this.x + this.width < 0)this.x=canvas.width; //this will make sure that when enemy crosses the border it respawns again in the canvas 
         //cycle throught all frames in sprite image to animate the enemy character
 
         if (gameFrame % this.flapSpeed ===0){

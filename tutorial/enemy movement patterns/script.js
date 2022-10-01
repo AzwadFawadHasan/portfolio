@@ -32,7 +32,7 @@ class Enemy{
         
         //this.speed = Math.random() * 4 -2; //creates a random number from 0-4 but we are pushing the range to start from -2 
         //so we are also getting enemeies who moves left and right both
-        this.spriteWidth =292;//293 is the width of a single frame of enemyimage1
+        this.spriteWidth =293;//293 is the width of a single frame of enemyimage1
 
         this.spriteHeight = 155;// 155 was the height of the first framelikewise as before
         this.width=this.spriteWidth/2.5;
@@ -40,26 +40,37 @@ class Enemy{
         this.height=this.spriteHeight/ 2.5;
 
         this.x=Math.random() * (canvas.width-this.width);//to randomize the position of enemy
+        //this.x=0;
         this.y = Math.random() * (canvas.height-this.height);
 
         this.frame =0;
-        this.flapSpeed = Math.floor(Math.random() * 50 + 1);
+        this.flapSpeed = Math.floor(Math.random() * 300 + 1) ;
+        
 
     }           
     update(){//moves the enemy in the canvas
-        //this.x+= Math.random()*15 -7.5;
+        this.x+= Math.random()*15 -7.5;
         //this.speed = gameSpeed - this.gameSpeed;
-        this.x+=Math.floor(Math.random() *5 -2.5);
+        //if(this.x>1758)this.x=0;
+        //this.x+=this.spriteWidth;
+
         this.y+= Math.floor(Math.random() *5 -2.5);
         //cycle throught all frames in sprite image to animate the enemy character
 
-        if (gameFrame % this.flapSpeed ===0){
+        if (gameFrame % 2 ===0){
             //this if statement basically runs the code two times in everyloop
             // this basically helps to slow down the animation frame rate
             this.frame > 4 ? this.frame = 0 : this.frame++;//this is alternative to if else statement
+            //if(this.frame > (6)){
+            //    this.frame=0;
+//
+            //}
+            //else{this.frame++;}
+            
+            //gameFrame++;
             //this is called ES6 ternary operator. shortens code 
         }
-
+        //gameFrame++;
         
 
     }
