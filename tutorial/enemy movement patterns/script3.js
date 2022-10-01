@@ -35,9 +35,9 @@ class Enemy{
         this.spriteWidth =218;//293 is the width of a single frame of enemyimage1
 
         this.spriteHeight = 177;// 155 was the height of the first framelikewise as before
-        this.width=this.spriteWidth/2;///2.5;
+        this.width=this.spriteWidth;///2.5;
         
-        this.height=this.spriteHeight/2;/// 2.5;
+        this.height=this.spriteHeight;/// 2.5;
 
         this.x=Math.random() * (canvas.width-this.width);//to randomize the position of enemy
         this.y = Math.random() * (canvas.height-this.height) ;
