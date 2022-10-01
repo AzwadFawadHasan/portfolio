@@ -28,13 +28,13 @@ class Enemy{
         //this.y=50;
         
         this.image = new Image();
-        this.image.src='enemiesSpriteImages\\enemy1.png';
+        this.image.src='enemiesSpriteImages\\enemy2.png';
         
-        //this.speed = Math.random() * 4 -2; //creates a random number from 0-4 but we are pushing the range to start from -2 
+        this.speed = Math.random() * 5 -1; //creates a random number from 0-4 but we are pushing the range to start from -2 
         //so we are also getting enemeies who moves left and right both
-        this.spriteWidth =292;//293 is the width of a single frame of enemyimage1
+        this.spriteWidth =266;//293 is the width of a single frame of enemyimage1
 
-        this.spriteHeight = 155;// 155 was the height of the first framelikewise as before
+        this.spriteHeight = 188;// 155 was the height of the first framelikewise as before
         this.width=this.spriteWidth/2.5;
         
         this.height=this.spriteHeight/ 2.5;
@@ -49,7 +49,7 @@ class Enemy{
     update(){//moves the enemy in the canvas
         //this.x+= Math.random()*15 -7.5;
         //this.speed = gameSpeed - this.gameSpeed;
-        this.x+=Math.floor(Math.random() *5 -2.5);
+        this.x-=this.speed;
         this.y+= Math.floor(Math.random() *5 -2.5);
         //cycle throught all frames in sprite image to animate the enemy character
 
