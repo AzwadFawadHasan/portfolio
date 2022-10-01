@@ -28,16 +28,16 @@ class Enemy{
         //this.y=50;
         
         this.image = new Image();
-        this.image.src='enemiesSpriteImages\\enemy2.png';
+        this.image.src='enemiesSpriteImages\\enemy3v2.jpg';
         
         this.speed = Math.random() * 5 -1; //creates a random number from 0-4 but we are pushing the range to start from -2 
         //so we are also getting enemeies who moves left and right both
-        this.spriteWidth =266;//293 is the width of a single frame of enemyimage1
+        this.spriteWidth =152.5;//293 is the width of a single frame of enemyimage1
 
-        this.spriteHeight = 188;// 155 was the height of the first framelikewise as before
-        this.width=this.spriteWidth/2.5;
+        this.spriteHeight = 123;// 155 was the height of the first framelikewise as before
+        this.width=this.spriteWidth;///2.5;
         
-        this.height=this.spriteHeight/ 2.5;
+        this.height=this.spriteHeight;/// 2.5;
 
         this.x=Math.random() * (canvas.width-this.width);//to randomize the position of enemy
         this.y = Math.random() * (canvas.height-this.height);
@@ -55,8 +55,8 @@ class Enemy{
     update(){//moves the enemy in the canvas
         //this.x+= Math.random()*15 -7.5;
         //this.speed = gameSpeed - this.gameSpeed;
-        this.x-=this.speed;
-        this.y+=this.curve* Math.sin(this.angle);//multiplying with 3 makes the sine curve more promineit
+        //this.x-=this.speed;
+        //this.y+=this.curve* Math.sin(this.angle);//multiplying with 3 makes the sine curve more promineit
         this.angle+=this.angleSpeed;
         //this.y+= Math.floor(Math.random() *5 -2.5);
         if (this.x + this.width < 0)this.x=canvas.width; //this will make sure that when enemy crosses the border it respawns again in the canvas 

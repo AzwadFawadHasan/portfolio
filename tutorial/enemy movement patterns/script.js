@@ -35,16 +35,16 @@ class Enemy{
         this.spriteWidth =293;//293 is the width of a single frame of enemyimage1
 
         this.spriteHeight = 155;// 155 was the height of the first framelikewise as before
-        this.width=this.spriteWidth/2.5;
+        this.width=this.spriteWidth;
         
-        this.height=this.spriteHeight/ 2.5;
+        this.height=this.spriteHeight;
 
         this.x=Math.random() * (canvas.width-this.width);//to randomize the position of enemy
         //this.x=0;
         this.y = Math.random() * (canvas.height-this.height);
 
         this.frame =0;
-        this.flapSpeed = Math.floor(Math.random() * 300 + 1) ;
+        this.flapSpeed = Math.floor(Math.random() * 3 + 1)  *10;
         
 
     }           
