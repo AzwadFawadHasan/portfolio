@@ -40,7 +40,7 @@ class Enemy{
         this.height=this.spriteHeight;/// 2.5;
 
         this.x=Math.random() * (canvas.width-this.width);//to randomize the position of enemy
-        this.y = Math.random() * (canvas.height-this.height);
+        this.y = Math.random() * (canvas.height-this.height) ;
 
         this.frame =0;
         this.flapSpeed = Math.floor(Math.random() * 3 + 1);
@@ -55,9 +55,9 @@ class Enemy{
     update(){//moves the enemy in the canvas
         //this.x+= Math.random()*15 -7.5;
         //this.speed = gameSpeed - this.gameSpeed;
-        this.x= this.curve * Math.sin(this.angle*Math.PI/360) + (canvas.width/2 - this.width/2);//values cycle to + and - 200 because of Math.sin as it returns a value between -1 and +1. Hence -200 to +200 because of this.curve 
+        this.x= this.curve * Math.cos(this.angle*Math.PI/180) + (canvas.width/2 - this.width/2);//values cycle to + and - 200 because of Math.sin as it returns a value between -1 and +1. Hence -200 to +200 because of this.curve 
         //this.y+=this.curve* Math.sin(this.angle);//multiplying with 3 makes the sine curve more promineit
-        this.y=this.curve * Math.sin(this.angle*Math.PI/180) + (canvas.width/2 - this.width/2); //cosine wave for consine vertical wave. Sin wave for sin horizontal wave. Creates a circular effect.
+        this.y=this.curve * Math.sin(this.angle*Math.PI/360) + (canvas.height/2 - this.height/2); //cosine wave for consine vertical wave. Sin wave for sin horizontal wave. Creates a circular effect.
         this.angle+=this.angleSpeed;
         //this.y+= Math.floor(Math.random() *5 -2.5);
         if (this.x + this.width < 0)this.x=canvas.width; //this will make sure that when enemy crosses the border it respawns again in the canvas 
