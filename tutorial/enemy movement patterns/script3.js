@@ -12,7 +12,7 @@ enemy1 ={
     height:200,
 
 }*/
-const numberOfEnemies=25;
+const numberOfEnemies=250;
 const enemiesArray =[];
 
 
@@ -46,8 +46,8 @@ class Enemy{
         this.flapSpeed = Math.floor(Math.random() * 3 + 1);
 
         //this.angle = Math.random()*2;
-        this.angle =0;
-        this.angleSpeed = Math.random() *2 +0.5;
+        this.angle =Math.random() *100;//determines the starting spawn point of the enemy3
+        this.angleSpeed = Math.random() * 0.5 +0.5;//determines the speed of the enemey 3 movement
         //this.curve = Math.random()*200 +50;
 
 
@@ -57,7 +57,7 @@ class Enemy{
         //this.speed = gameSpeed - this.gameSpeed;
         this.x= (canvas.width/2) * Math.cos(this.angle*Math.PI/90) + (canvas.width/2 - this.width/2);//values cycle to + and - 200 because of Math.sin as it returns a value between -1 and +1. Hence -200 to +200 because of this.curve 
         //this.y+=this.curve* Math.sin(this.angle);//multiplying with 3 makes the sine curve more promineit
-        this.y=(canvas.height/2) * Math.sin(this.angle*Math.PI/270) + (canvas.height/2 - this.height/2); //cosine wave for consine vertical wave. Sin wave for sin horizontal wave. Creates a circular effect.
+        this.y=(canvas.height/2) * Math.sin(this.angle*Math.PI/270) + (canvas.height/2 - this.height/2); //cosine wave for consine vertical wave. Sin wave for sin horizontal wave. Creates a circular effect. //shape of path of enemy is detemined by 90 and 270
         this.angle+=this.angleSpeed;
         //this.y+= Math.floor(Math.random() *5 -2.5);
         if (this.x + this.width < 0)this.x=canvas.width; //this will make sure that when enemy crosses the border it respawns again in the canvas 
