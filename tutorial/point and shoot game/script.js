@@ -38,7 +38,8 @@ class Raven{
         this.timeSinceFlap = 0;//0 at first, grows by the amount of deltatime until  it reaches value in flapinterval
         //then it will tr9gger jext frame of sprite sheet and reset back to 0
         this.flapInterval= Math.random()*10899 +5500;//5500;
-
+        this.randomColors = [Math.floor(Math.random()*255), Math.floor(Math.random()*255),Math.floor(Math.random()*255)];
+        this.color = 'rgb(' + this.randomColors[0] +',' +this.randomColors[1]+','+this.randomColors[2]+')';
 
         
 
@@ -68,7 +69,8 @@ class Raven{
   
     }
     draw(){
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
+        collisionCtx.fillStyle = this.color;
+        collisionCtx.fillRect(this.x, this.y, this.width, this.height);
         ctx.drawImage(this.image, this.frame*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);;
 
     }
@@ -83,12 +85,27 @@ function drawScore(){
 }
 
 window.addEventListener('click', function(e){//for shooting ravens
-    const detectPixelColor = ctx.getImageData(e.x,e.y,1,1);//detects pixels color, getImageData scans the canvas and returns an array like object called Uint8 -> it contais unsighned 8 bit integeres
+    const detectPixelColor = collisionCtx.getImageData(e.x,e.y,1,1);//detects pixels color, getImageData scans the canvas and returns an array like object called Uint8 -> it contais unsighned 8 bit integeres
+    console.log(detectPixelColor);
     //we want to scan only one pixel so cooridinates of that area is gonna be e.x ,e.y and width and height of that area will be 1,1  
     
     //doing collision detection with colour
     //for that we need to know the color of the pixel we are on
     
+
+
+    const pc = detectPixelColor.data;//To get hold of data of UIint8ClampedArray which contains red, green,blue and alpha value. we ignore the alpha
+    ravens.forEach(object=>{
+        if(object.randomColors[0]===pc[0]
+            &&
+            object.randomColors[1]===pc[1]
+            &&
+            object.randomColors[2]===pc[2]){
+                object.markedForDeletion=true;
+                score++;
+            }
+    });
+
 });
 
 
@@ -96,6 +113,7 @@ function animate(timestamp){//takes values in milliseconds
     //timestamp behavior is a default javascript behaviour when using request animation frame (animate)
     //as the loop runs requestAnimationFrame runs over and over and animate becomes the call backfunction here
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    collisionCtx.clearRect(0,0,canvas.width,canvas.height);
     let deltaTime=0;
     deltaTime= timestamp -lastTime;
     lastTime - timestamp;
@@ -104,6 +122,14 @@ function animate(timestamp){//takes values in milliseconds
     if(timeToNextRaven > ravenInterval){
         ravens.push(new Raven());
         timeToNextRaven=0;
+        ravens.sort(function(a,b){
+            //sorting ravens by width
+            //so that smaller ones remain in foreground
+            return a.width-b.width;
+            //width of everyelement being comapred with width of every other element in the array
+            
+
+        });
 
     };
     drawScore();
@@ -120,6 +146,6 @@ function animate(timestamp){//takes values in milliseconds
     //but the array should be filled only with objects for which this condition is true
     requestAnimationFrame(animate);
 
-}
+} 
 
 animate(0);

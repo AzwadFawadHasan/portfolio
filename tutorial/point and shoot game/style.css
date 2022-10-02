@@ -13,3 +13,7 @@ canvas {
     height:100%;
     
 }
+
+#collisionCanvas{
+    background: red;
+}
