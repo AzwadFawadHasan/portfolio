@@ -3,6 +3,14 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+
+const collisionCanvas = document.getElementById('collisionCanvas');
+const collisionCtx = canvas.getContext('2d');
+collisionCtx.width = window.innerWidth;
+collisionCtx.height = window.innerHeight;
+
+
+
 let timeToNextRaven =0; //helper varaible, this acuumulates milisec values between frames until it reaches our interval value and triggers next frame
 let ravenInterval = 500;
 let lastTime=0;
@@ -74,13 +82,14 @@ function drawScore(){
     ctx.fillText('Score: '+score, 55,80)//hardcoding string
 }
 
-window.addEventListener('click', function(e)){//for shooting ravens
+window.addEventListener('click', function(e){//for shooting ravens
     const detectPixelColor = ctx.getImageData(e.x,e.y,1,1);//detects pixels color, getImageData scans the canvas and returns an array like object called Uint8 -> it contais unsighned 8 bit integeres
     //we want to scan only one pixel so cooridinates of that area is gonna be e.x ,e.y and width and height of that area will be 1,1  
+    
     //doing collision detection with colour
     //for that we need to know the color of the pixel we are on
     
-}
+});
 
 
 function animate(timestamp){//takes values in milliseconds
