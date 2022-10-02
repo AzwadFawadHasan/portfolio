@@ -71,9 +71,13 @@ function drawScore(){
     ctx.fillStyle='black';//for white numbers
     ctx.fillText('Score: '+score, 50,75)//hardcoding string
     ctx.fillStyle='white';//for white numbers
-    ctx.fillText('Score: '+score, 50,75)//hardcoding string
+    ctx.fillText('Score: '+score, 55,80)//hardcoding string
 }
 
+window.addEventListener('click', function(e)){//for shooting ravens
+    const detectPixelColor = ctx.getImageData(e.x,e.y,1,1);
+    
+}
 
 
 function animate(timestamp){//takes values in milliseconds
