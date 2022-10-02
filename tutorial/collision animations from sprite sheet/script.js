@@ -10,6 +10,11 @@ const explosions =[];
 
 class Explosion{
     constructor(x,y){
+        this.x = x;
+        this.y =y; //vertical  y coordinate
+        this.spriteWidth = 200;
+        this.spriteHeight = 179
+
         
     }
 }
