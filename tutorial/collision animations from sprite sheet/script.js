@@ -39,11 +39,12 @@ class Explosion{
 window.addEventListener('click', function(e){//we will be listening for mouse click event
     //and in callback function, it will run every time a mouse click occurs
 
-    ctx.fillRect(x,y,width,height);
+    ctx.fillStyle='white';
+    ctx.fillRect(e.x,e.y,width,height);
     //we want this rectangle to be drawn at the current coordinates of our mouse click
     // to do that its easy
     // call back function of event listener has access to event objects
     //usually we name this object e
     //this e is event object
-    
+
 });
