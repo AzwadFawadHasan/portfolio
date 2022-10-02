@@ -6,9 +6,9 @@ canvas.height = window.innerHeight;
 let timeToNextRaven =0; //helper varaible, this acuumulates milisec values between frames until it reaches our interval value and triggers next frame
 let ravenInterval = 500;
 let lastTime=0;
-
+ctx.font = '50px Impact';
 let ravens = [];//using let variables as const variables can't be reassigned 
-
+let score =0;
 
 class Raven{
     constructor(){
@@ -66,6 +66,14 @@ class Raven{
     }
 }
 
+
+function drawScore(){
+    ctx.fillStyle='white';//for white numbers
+    ctx.fillText('Score: '+score, 50,75)//hardcoding string
+}
+
+
+
 function animate(timestamp){//takes values in milliseconds
     //timestamp behavior is a default javascript behaviour when using request animation frame (animate)
     //as the loop runs requestAnimationFrame runs over and over and animate becomes the call backfunction here
@@ -80,6 +88,7 @@ function animate(timestamp){//takes values in milliseconds
         timeToNextRaven=0;
 
     };
+    drawScore();
     [...ravens].forEach(object => object.draw());//[] this is an array literal
       //... three dots are array literal spread operator
       //we are speading the ravens array inside this new array we just created
