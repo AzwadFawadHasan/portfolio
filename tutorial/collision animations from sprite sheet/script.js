@@ -1,5 +1,5 @@
-const canvas = document.getElementsById('canvas1');
-const ctx = canvas;getContext('2d');
+const canvas = document.getElementById('canvas1');
+const ctx = canvas.getContext('2d');
 canvas.width = 500;
 canvas.height = 700;
 
@@ -7,6 +7,9 @@ ctx.fillStyle = 'white';
 ctx.fillRect(50,50,100,150);
 
 const explosions =[];
+let canvasPosition = canvas.getBoundingClientRect();// this is needed as window.addEventListener does not take into account the size of our canvas. We need to offset our cooridinates of x and y so that after mouse click rect appears right under our mouse click
+//this getbounding client rect help us to meause canvas position 
+// this can be used to measure any html element
 
 class Explosion{
     constructor(x,y){
@@ -40,7 +43,7 @@ window.addEventListener('click', function(e){//we will be listening for mouse cl
     //and in callback function, it will run every time a mouse click occurs
 
     ctx.fillStyle='white';
-    ctx.fillRect(e.x,e.y,width,height);
+    ctx.fillRect(e.x-canvasPosition.left, e.y-canvasPosition.top,50,50);
     //we want this rectangle to be drawn at the current coordinates of our mouse click
     // to do that its easy
     // call back function of event listener has access to event objects
