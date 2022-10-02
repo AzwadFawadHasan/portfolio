@@ -14,8 +14,10 @@ class Raven{
     constructor(){
         this.spriteWidth = 271;
         this.spriteHeight= 194;
-        this.width = this.spriteWidth/2;
-        this.height = this.spriteHeight/2;
+        this.sizeModifier = Math.random() *0.6 +0.4;
+
+        this.width = this.spriteWidth*this.sizeModifier;
+        this.height = this.spriteHeight*this.sizeModifier;
         this.x = canvas.width;//it;s gona be canvas.width so the the ravens can fly to the left of the scren
         this.y = Math.random() * (canvas.height - this.height);
         this.directionX = Math.random() * 5 +3; //a number between 5 and 3
@@ -23,6 +25,10 @@ class Raven{
         this.markedForDeletion=false;
         this.image = new Image();
         this.image.src = 'raven.png';
+        this.frame =0; //no of frames in the sprite sheet
+        this.maxFrame =4;
+
+
         
 
 
@@ -33,6 +39,11 @@ class Raven{
         this.x-=this.directionX;//moves the raven around.. here it moves it to the left
         if (this.x <0  - this.width){//meaning it has moved all the way to the left of the screen
             this.markedForDeletion= true;        
+        }
+        if (this.frame > this.maxFrame){
+            this.frame=0;
+        }else{
+            this.frame++;
         }
     }
     draw(){
