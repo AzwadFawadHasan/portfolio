@@ -27,6 +27,9 @@ class Raven{
         this.image.src = 'raven.png';
         this.frame =0; //no of frames in the sprite sheet
         this.maxFrame =4;
+        this.timeSinceFlap = 0;//0 at first, grows by the amount of deltatime until  it reaches value in flapinterval
+        //then it will tr9gger jext frame of sprite sheet and reset back to 0
+        this.flapInterval= Math.random()*10899 +5500;//5500;
 
 
         
@@ -35,20 +38,26 @@ class Raven{
          
 
     }
-    update(){
+    update(deltaTime){
         this.x-=this.directionX;//moves the raven around.. here it moves it to the left
         if (this.x <0  - this.width){//meaning it has moved all the way to the left of the screen
             this.markedForDeletion= true;        
         }
-        if (this.frame > this.maxFrame){
-            this.frame=0;
-        }else{
-            this.frame++;
+        this.timeSinceFlap += deltaTime;//unifies animation speed in fast and slow devices both
+        if(this.timeSinceFlap> this.flapInterval){
+
+            if (this.frame > this.maxFrame){
+                this.frame=0;
+            }else{
+                this.frame++;
+            }
+            this.timeSinceFlap=0;
         }
+  
     }
     draw(){
         ctx.strokeRect(this.x, this.y, this.width, this.height);
-        ctx.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);;
+        ctx.drawImage(this.image, this.frame*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);;
 
     }
 }
@@ -71,7 +80,7 @@ function animate(timestamp){//takes values in milliseconds
       //... three dots are array literal spread operator
       //we are speading the ravens array inside this new array we just created
     //for each raven object in raven's array call their associated  update method.
-    [...ravens].forEach(object => object.update()) ;
+    [...ravens].forEach(object => object.update(deltaTime)) ;
     //using splice function in array removes elements from the middle of the array
     //hence he have to adjust the index so that neighbours arent affected.
     //its bettwer to use  filter method() instead
