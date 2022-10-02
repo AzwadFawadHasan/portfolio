@@ -26,15 +26,15 @@ class Explosion{
         this.frame = 0;
         this.timer=0;
         this.angle= Math.random() * 6.2;//A circle is 360degrees->6.2 rad
-        //this.sound = new Audio();
-        //this.sound.src = 'boom.wav';
+        this.sound = new Audio();
+        this.sound.src = 'boom.wav';
     
         
     }
     update(){
-        
+        if(this.frame===0){this.sound.play();}
         ctx.clearRect(0,0, canvas.width, canvas.height); 
-        //if(this.sound===0){this.sound.play();}
+        
         this.timer++;
         if(this.timer %10 ===0){//run this code every 10 frames
            
