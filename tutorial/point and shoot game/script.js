@@ -40,6 +40,7 @@ class Raven{
     }
     update(deltaTime){
         this.x-=this.directionX;//moves the raven around.. here it moves it to the left
+        this.y += this.directionY;
         if (this.x <0  - this.width){//meaning it has moved all the way to the left of the screen
             this.markedForDeletion= true;        
         }
