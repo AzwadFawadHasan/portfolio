@@ -19,12 +19,13 @@ class Explosion{
         //division operation in javascript is more expensive than multiplication
         this.width = this.spriteWidth*0.7;
         this.height = this.spriteHeight*0.7;
-        this.x = x - this.width/2;
-        this.y =y - this.height/2; //vertical  y coordinate
+        this.x = x ;
+        this.y =y ; //vertical  y coordinate
         this.image = new Image();
         this.image.src = "boom.png";
         this.frame = 0;
         this.timer=0;
+        this.angle= Math.random() * 6.2;//A circle is 360degrees->6.2 rad
 
         
     }
@@ -35,13 +36,21 @@ class Explosion{
             this.frame++// this if statement slows down animation
         }
         //this.frame++;
+        
 
     }
-    draw(){
+    draw(){//rotating a smoke frame
+        ctx.save(); 
+        ctx.translate(this.x, this.y);//translate rotation center point
+        // i want to rotate it around it's center so this.x and this.y
+        ctx.rotate(this.angle);//rotate each one by a different angle value 
+
         //ctx.drawImage(image, sx, sy,sw, sh,dx, dy, dw,dh);
         //sy =0 here since it's vertical y cooridinate we want to crop out from the source , since the spirte sheet has 1 row sy =0
-        ctx.drawImage(this.image, this.spriteWidth* this.frame, 0,this.spriteWidth, this.spriteHeight,this.x, this.y, this.width,this.height);//last 4 means desitination 
+        ctx.drawImage(this.image, this.spriteWidth* this.frame, 0,this.spriteWidth, this.spriteHeight,0 -this.width/2, 0-this.height/2, this.width,this.height);//last 4 means desitination 
         
+
+        ctx.restore();
     }
 }
 
