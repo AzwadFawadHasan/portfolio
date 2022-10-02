@@ -26,14 +26,22 @@ class Explosion{
         this.frame = 0;
         this.timer=0;
         this.angle= Math.random() * 6.2;//A circle is 360degrees->6.2 rad
-
+        //this.sound = new Audio();
+        //this.sound.src = 'boom.wav';
+    
         
     }
     update(){
+        
+        ctx.clearRect(0,0, canvas.width, canvas.height); 
+        //if(this.sound===0){this.sound.play();}
         this.timer++;
         if(this.timer %10 ===0){//run this code every 10 frames
+           
 
             this.frame++// this if statement slows down animation
+            
+            
         }
         //this.frame++;
         
@@ -51,6 +59,7 @@ class Explosion{
         
 
         ctx.restore();
+        //translate and rotate only one draw of one object
     }
 }
 
@@ -75,13 +84,13 @@ window.addEventListener('click', function(e){//we will be listening for mouse cl
 });
 
 
-window.addEventListener('mousemove', function(e){//we will be listening for mouse click event
-   
-    createAnimation(e);
-
-   
-
-});
+//window.addEventListener('mousemove', function(e){//we will be listening for mouse click event
+//   
+//    createAnimation(e);
+//
+//   
+//
+//});
 
 function createAnimation(e){
     ctx.clearRect(0,0, canvas.width, canvas.height); // to only see the current frame we do this as this clears the canvas
@@ -89,17 +98,20 @@ function createAnimation(e){
     let positionX= e.x - canvasPosition.left;
     let positionY=e.y - canvasPosition.top;
     explosions.push(new Explosion(positionX,positionY));
-
+    //ctx.clearRect(0,0, canvas.width, canvas.height); // to only see the current frame we do this as this clears the canvas
 }
 
 function animate(){
     for(let i =0; i<explosions.length; i++){
         explosions[i].update();
         explosions[i].draw();
+        
+
         if(explosions[i].frame >5){
             explosions.splice(i,1);
             i--;
         }
+    //ctx.clearRect(0,0, canvas.width, canvas.height); // to only see the current frame we do this as this clears the canvas
 
     }
     requestAnimationFrame(animate);
