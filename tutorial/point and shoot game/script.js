@@ -6,7 +6,7 @@ canvas.height = window.innerHeight;
 let timeToNextRaven =0; //helper varaible, this acuumulates milisec values between frames until it reaches our interval value and triggers next frame
 let ravenInterval = 500;
 let lastTime=0;
-ctx.font = '50px Impact';
+ctx.font = '50px Impact'; 
 let ravens = [];//using let variables as const variables can't be reassigned 
 let score =0;
 
@@ -68,6 +68,8 @@ class Raven{
 
 
 function drawScore(){
+    ctx.fillStyle='black';//for white numbers
+    ctx.fillText('Score: '+score, 50,75)//hardcoding string
     ctx.fillStyle='white';//for white numbers
     ctx.fillText('Score: '+score, 50,75)//hardcoding string
 }
