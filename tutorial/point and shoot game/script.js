@@ -33,6 +33,7 @@ class Raven{
         this.markedForDeletion=false;
         this.image = new Image();
         this.image.src = 'raven.png';
+        this.crossOrigin = "Anonymous";
         this.frame =0; //no of frames in the sprite sheet
         this.maxFrame =4;
         this.timeSinceFlap = 0;//0 at first, grows by the amount of deltatime until  it reaches value in flapinterval
@@ -76,6 +77,42 @@ class Raven{
     }
 }
 
+let explosions = []; //holds all active explosions objects
+
+class Explosions{
+    constructor(x,y,size){
+        this.image = new Image();
+        this.image.src = 'boom.png';
+        this.spriteHeight=179;
+        this.spriteWidth = 200; 
+        this.size =size;
+        this.x=x;
+        this.y=y;
+        this.frame=0;
+        this.sound = new Audio();
+        this.sound.src='boom.wav';
+        this.timeSinceLastFrame =0;
+        this.frameInterval = 200;//200 milisec
+        this.markedForDeletion=false;
+
+    }
+    update(deltatime){
+        if(this.frame===0)this.sound.play();
+        this.timeSinceLastFrame += deltatime;
+        if(this.timeSinceLastFrame>this.frameInterval){
+            this.frame++;
+            this.timeSinceLastFrame=0;
+            if(this.frame>5){
+                this.markedForDeletion=true;
+            }
+        }
+    
+    }
+    draw(){
+        ctx.drawImage(this.image, this.frame*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight,this.x,this.y- this.size/4, this.size, this.size);
+    }
+}
+
 
 function drawScore(){
     ctx.fillStyle='black';//for white numbers
@@ -86,6 +123,7 @@ function drawScore(){
 
 window.addEventListener('click', function(e){//for shooting ravens
     const detectPixelColor = collisionCtx.getImageData(e.x,e.y,1,1);//detects pixels color, getImageData scans the canvas and returns an array like object called Uint8 -> it contais unsighned 8 bit integeres
+    detectPixelColor.crossOrigin = "Anonymous";
     console.log(detectPixelColor);
     //we want to scan only one pixel so cooridinates of that area is gonna be e.x ,e.y and width and height of that area will be 1,1  
     
@@ -101,8 +139,10 @@ window.addEventListener('click', function(e){//for shooting ravens
             object.randomColors[1]===pc[1]
             &&
             object.randomColors[2]===pc[2]){
+                //detects collision by color
                 object.markedForDeletion=true;
                 score++;
+                explostions.push(new Explosions(object.x, object.y, object.width));
             }
     });
 
@@ -133,17 +173,19 @@ function animate(timestamp){//takes values in milliseconds
 
     };
     drawScore();
-    [...ravens].forEach(object => object.draw());//[] this is an array literal
+    [...ravens, ...explosions].forEach(object => object.draw());//[] this is an array literal
       //... three dots are array literal spread operator
       //we are speading the ravens array inside this new array we just created
     //for each raven object in raven's array call their associated  update method.
-    [...ravens].forEach(object => object.update(deltaTime)) ;
+    [...ravens, ...explosions].forEach(object => object.update(deltaTime)) ;
     //using splice function in array removes elements from the middle of the array
     //hence he have to adjust the index so that neighbours arent affected.
     //its bettwer to use  filter method() instead
     ravens = ravens.filter(object => !object.markedForDeletion);
     //take ravens variable from above, and place it with the same array
+    
     //but the array should be filled only with objects for which this condition is true
+    explosions = explosions.filter(object => !object.markedForDeletion);
     requestAnimationFrame(animate);
 
 } 
