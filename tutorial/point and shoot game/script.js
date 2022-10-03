@@ -5,7 +5,7 @@ canvas.height = window.innerHeight;
 
 
 const collisionCanvas = document.getElementById('collisionCanvas');
-const collisionCtx = canvas.getContext('2d');
+const collisionCtx = collisionCanvas.getContext('2d',{willReadFrequently: true});
 collisionCtx.width = window.innerWidth;
 collisionCtx.height = window.innerHeight;
 
@@ -34,13 +34,17 @@ class Raven{
         this.markedForDeletion=false;
         this.image = new Image();
         this.image.src = 'raven.png';
-        this.image.crossOriginPolicy = "Anonymous";
+        //this.image.crossOriginPolicy = "Anonymous";
         this.frame =0; //no of frames in the sprite sheet
         this.maxFrame =4;
         this.timeSinceFlap = 0;//0 at first, grows by the amount of deltatime until  it reaches value in flapinterval
         //then it will tr9gger jext frame of sprite sheet and reset back to 0
         this.flapInterval= Math.random()*10899 +5500;//5500;
-        this.randomColors = [Math.floor(Math.random()*255), Math.floor(Math.random()*255),Math.floor(Math.random()*255)];
+        this.a = Math.floor(Math.random() * 250);
+        this.b = Math.floor(Math.random() * 250);
+        this.c = Math.floor(Math.random() * 250);
+        this.randomColors = [this.a, this.b, this.c];
+        //this.randomColors = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255),Math.floor(Math.random() * 255)];
         this.color = 'rgb(' + this.randomColors[0] +',' +this.randomColors[1]+','+this.randomColors[2]+')';
         this.hasTrail = Math.random() >0.5  ;
 
@@ -170,10 +174,10 @@ function drawScore(){
 }
 
 window.addEventListener('click', function(e){//for shooting ravens
-    
-    const detectPixelColor = collisionCtx.getImageData(e.x,e.y,1,1);//detects pixels color, getImageData scans the canvas and returns an array like object called Uint8 -> it contais unsighned 8 bit integeres
-    console.log('hi');
-    detectPixelColor.crossOriginPolicy = "Anonymous";
+    //const detectPC = collisionCanvas;
+    const detectPixelColor = collisionCtx.getImageData(e.x, e.y, 1, 1);//detects pixels color, getImageData scans the canvas and returns an array like object called Uint8 -> it contais unsighned 8 bit integeres
+    //console.log('hi');
+    //detectPixelColor.crossOriginPolicy = "Anonymous";
     //crossOriginPolicy: 'Anonymous';
     console.log(detectPixelColor);
     //we want to scan only one pixel so cooridinates of that area is gonna be e.x ,e.y and width and height of that area will be 1,1  
@@ -184,12 +188,9 @@ window.addEventListener('click', function(e){//for shooting ravens
 
 
     const pc = detectPixelColor.data;//To get hold of data of UIint8ClampedArray which contains red, green,blue and alpha value. we ignore the alpha
-    ravens.forEach(object=>{
-        if(object.randomColors[0]===pc[0]
-            &&
-            object.randomColors[1]===pc[1]
-            &&
-            object.randomColors[2]===pc[2]){
+    ravens.forEach(object => {
+        if(object.randomColors[0] === pc[0] && object.randomColors[1]===pc[1] && object.randomColors[2]===pc[2]){
+            
                 //detects collision by color
                 object.markedForDeletion=true;
                 score++;
