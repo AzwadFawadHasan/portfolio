@@ -14,6 +14,7 @@ collisionCtx.height = window.innerHeight;
 let timeToNextRaven =0; //helper varaible, this acuumulates milisec values between frames until it reaches our interval value and triggers next frame
 let ravenInterval = 500;
 let lastTime=0;
+let gameOver =false;
 ctx.font = '50px Impact'; 
 let ravens = [];//using let variables as const variables can't be reassigned 
 let score =0;
@@ -67,6 +68,7 @@ class Raven{
             }
             this.timeSinceFlap=0;
         }
+        if(this.x<0 - this.width) gameOver=true;
   
     }
     draw(){
@@ -113,6 +115,12 @@ class Explosions{
     }
 }
 
+function drawGameOver(){
+    ctx.textAlign ='center';
+    ctx.fillStyle='black';
+    ctx.fillText('Game Over, your score is' + score , canvas.width/2, canvas.height/2);
+    ctx.fillText('Game Over, your score is' + score , canvas.width/2 +5, canvas.height/2 + 5);
+}
 
 function drawScore(){
     ctx.fillStyle='black';//for white numbers
@@ -142,7 +150,7 @@ window.addEventListener('click', function(e){//for shooting ravens
                 //detects collision by color
                 object.markedForDeletion=true;
                 score++;
-                explostions.push(new Explosions(object.x, object.y, object.width));
+                explosions.push(new Explosions(object.x, object.y, object.width));
             }
     });
 
@@ -186,8 +194,8 @@ function animate(timestamp){//takes values in milliseconds
     
     //but the array should be filled only with objects for which this condition is true
     explosions = explosions.filter(object => !object.markedForDeletion);
-    requestAnimationFrame(animate);
-
+    if(!gameOver)requestAnimationFrame(animate);
+    else drawGameOver();
 } 
 
 animate(0);
