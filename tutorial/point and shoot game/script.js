@@ -34,7 +34,7 @@ class Raven{
         this.markedForDeletion=false;
         this.image = new Image();
         this.image.src = 'raven.png';
-        this.crossOrigin = "Anonymous";
+        this.image.crossOriginPolicy = "Anonymous";
         this.frame =0; //no of frames in the sprite sheet
         this.maxFrame =4;
         this.timeSinceFlap = 0;//0 at first, grows by the amount of deltatime until  it reaches value in flapinterval
@@ -44,11 +44,6 @@ class Raven{
         this.color = 'rgb(' + this.randomColors[0] +',' +this.randomColors[1]+','+this.randomColors[2]+')';
         this.hasTrail = Math.random() >0.5  ;
 
-
-        
-
-
-         
 
     }
     update(deltaTime){
@@ -70,7 +65,12 @@ class Raven{
             }
             this.timeSinceFlap=0;
             if(this.hasTrail){
-                particles.push(new Particle(this.x, this.y, this.width, this.color));
+                for(let i =0 ; i <5; i++){
+
+                    particles.push(new Particle(this.x, this.y, this.width, this.color));
+
+                }
+                
             }
            
         }
@@ -78,6 +78,7 @@ class Raven{
   
     }
     draw(){
+
         //collisionCtx.fillStyle = this.color;
         //collisionCtx.fillRect(this.x, this.y, this.width, this.height);
         ctx.drawImage(this.image, this.frame*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);;
@@ -124,8 +125,9 @@ class Explosions{
 function drawGameOver(){
     ctx.textAlign ='center';
     ctx.fillStyle='black';
-    ctx.fillText('Game Over, your score is' + score , canvas.width/2, canvas.height/2);
-    ctx.fillText('Game Over, your score is' + score , canvas.width/2 +5, canvas.height/2 + 5);
+    ctx.fillText('Game Over, your score is ' + score , canvas.width/2, canvas.height/2);
+    ctx.fillStyle='white';
+    ctx.fillText('Game Over, your score is ' + score , canvas.width/2 +5, canvas.height/2 + 5);
 }
 
 let particles =[];
@@ -133,8 +135,8 @@ let particles =[];
 class Particle{
     constructor(x,y,size,color){
         this.size = size;
-        this.x=x +this.size/2;
-        this.y=y + this.size/3;
+        this.x=x +this.size/2 +Math.random() *50 -25;
+        this.y=y + this.size/3+Math.random() *50 -25;
         
         this.radius= Math.random()*this.size/10;
         this.maxRadius = Math.random()*20+35;
@@ -147,26 +149,32 @@ class Particle{
     update(){
         this.x+=this.speedX;
         this.radius+=0.5;
-        if(this.raidus>this.maxRadius) this.markedForDeletion=true;
+        if(this.raidus>this.maxRadius-5) this.markedForDeletion=true;
     }
     draw(){
+        ctx.save();//saves a snapshot
+        ctx.globalAlpha=1-(this.radius/this.maxRadius);
         ctx.beginPath();
         ctx.fillStyle=this.color;
         ctx.arc(this.x,this.y,this.radius, 0, Math.PI*2);
         ctx.fill();
+        ctx.restore();//revert canvas settings
     }
 }
 
 function drawScore(){
     ctx.fillStyle='black';//for white numbers
-    ctx.fillText('Score: '+score, 50,75)//hardcoding string
+    ctx.fillText('Score: '+score, 50,75);//hardcoding string
     ctx.fillStyle='white';//for white numbers
     ctx.fillText('Score: '+score, 55,80)//hardcoding string
 }
 
 window.addEventListener('click', function(e){//for shooting ravens
+    
     const detectPixelColor = collisionCtx.getImageData(e.x,e.y,1,1);//detects pixels color, getImageData scans the canvas and returns an array like object called Uint8 -> it contais unsighned 8 bit integeres
-    detectPixelColor.crossOrigin = "Anonymous";
+    console.log('hi');
+    detectPixelColor.crossOriginPolicy = "Anonymous";
+    //crossOriginPolicy: 'Anonymous';
     console.log(detectPixelColor);
     //we want to scan only one pixel so cooridinates of that area is gonna be e.x ,e.y and width and height of that area will be 1,1  
     
