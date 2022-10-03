@@ -42,6 +42,8 @@ class Raven{
         this.flapInterval= Math.random()*10899 +5500;//5500;
         this.randomColors = [Math.floor(Math.random()*255), Math.floor(Math.random()*255),Math.floor(Math.random()*255)];
         this.color = 'rgb(' + this.randomColors[0] +',' +this.randomColors[1]+','+this.randomColors[2]+')';
+        this.hasTrail = Math.random() >0.5  ;
+
 
         
 
@@ -67,6 +69,10 @@ class Raven{
                 this.frame++;
             }
             this.timeSinceFlap=0;
+            if(this.hasTrail){
+                particles.push(new Particle(this.x, this.y, this.width, this.color));
+            }
+           
         }
         if(this.x<0 - this.width) gameOver=true;
   
@@ -120,6 +126,35 @@ function drawGameOver(){
     ctx.fillStyle='black';
     ctx.fillText('Game Over, your score is' + score , canvas.width/2, canvas.height/2);
     ctx.fillText('Game Over, your score is' + score , canvas.width/2 +5, canvas.height/2 + 5);
+}
+
+let particles =[];
+
+class Particle{
+    constructor(x,y,size,color){
+        this.size = size;
+        this.x=x +this.size/2;
+        this.y=y + this.size/3;
+        
+        this.radius= Math.random()*this.size/10;
+        this.maxRadius = Math.random()*20+35;
+        this.markedForDeletion = false;
+        this.speedX = Math.random() *1 +0.5;
+        this.color=color;
+
+        ;
+    }
+    update(){
+        this.x+=this.speedX;
+        this.radius+=0.5;
+        if(this.raidus>this.maxRadius) this.markedForDeletion=true;
+    }
+    draw(){
+        ctx.beginPath();
+        ctx.fillStyle=this.color;
+        ctx.arc(this.x,this.y,this.radius, 0, Math.PI*2);
+        ctx.fill();
+    }
 }
 
 function drawScore(){
@@ -181,11 +216,11 @@ function animate(timestamp){//takes values in milliseconds
 
     };
     drawScore();
-    [...ravens, ...explosions].forEach(object => object.draw());//[] this is an array literal
+    [...particles,...ravens, ...explosions].forEach(object => object.draw());//[] this is an array literal
       //... three dots are array literal spread operator
       //we are speading the ravens array inside this new array we just created
     //for each raven object in raven's array call their associated  update method.
-    [...ravens, ...explosions].forEach(object => object.update(deltaTime)) ;
+    [...particles,...ravens, ...explosions].forEach(object => object.update(deltaTime)) ;
     //using splice function in array removes elements from the middle of the array
     //hence he have to adjust the index so that neighbours arent affected.
     //its bettwer to use  filter method() instead
@@ -194,6 +229,7 @@ function animate(timestamp){//takes values in milliseconds
     
     //but the array should be filled only with objects for which this condition is true
     explosions = explosions.filter(object => !object.markedForDeletion);
+    particles = particles.filter(object => !object.markedForDeletion);
     if(!gameOver)requestAnimationFrame(animate);
     else drawGameOver();
 } 
