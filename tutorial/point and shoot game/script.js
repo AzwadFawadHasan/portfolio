@@ -12,7 +12,7 @@ collisionCanvas.height = window.innerHeight;
 
 
 let timeToNextRaven =0; //helper varaible, this acuumulates milisec values between frames until it reaches our interval value and triggers next frame
-let ravenInterval = 500;
+let ravenInterval = 9000;
 let lastTime=0;
 let gameOver =false;
 ctx.font = '50px Impact'; 
