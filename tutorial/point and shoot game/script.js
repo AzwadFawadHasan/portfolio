@@ -1,13 +1,13 @@
 const canvas = document.getElementById('canvas1');
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d', {willReadFrequently: true});
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 
 const collisionCanvas = document.getElementById('collisionCanvas');
 const collisionCtx = collisionCanvas.getContext('2d',{willReadFrequently: true});
-collisionCtx.width = window.innerWidth;
-collisionCtx.height = window.innerHeight;
+collisionCanvas.width = window.innerWidth;
+collisionCanvas.height = window.innerHeight;
 
 
 
@@ -17,7 +17,7 @@ let lastTime=0;
 let gameOver =false;
 ctx.font = '50px Impact'; 
 let ravens = [];//using let variables as const variables can't be reassigned 
-let score =0;
+let score = 0;
 
 class Raven{
     constructor(){
@@ -40,9 +40,9 @@ class Raven{
         this.timeSinceFlap = 0;//0 at first, grows by the amount of deltatime until  it reaches value in flapinterval
         //then it will tr9gger jext frame of sprite sheet and reset back to 0
         this.flapInterval= Math.random()*10899 +5500;//5500;
-        this.a = Math.floor(Math.random() * 250);
-        this.b = Math.floor(Math.random() * 250);
-        this.c = Math.floor(Math.random() * 250);
+        this.a = Math.floor(Math.random() * 255);
+        this.b = Math.floor(Math.random() * 255);
+        this.c = Math.floor(Math.random() * 255);
         this.randomColors = [this.a, this.b, this.c];
         //this.randomColors = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255),Math.floor(Math.random() * 255)];
         this.color = 'rgb(' + this.randomColors[0] +',' +this.randomColors[1]+','+this.randomColors[2]+')';
@@ -83,8 +83,8 @@ class Raven{
     }
     draw(){
 
-        //collisionCtx.fillStyle = this.color;
-        //collisionCtx.fillRect(this.x, this.y, this.width, this.height);
+        collisionCtx.fillStyle = this.color;
+        collisionCtx.fillRect(this.x, this.y, this.width, this.height);
         ctx.drawImage(this.image, this.frame*this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);;
 
     }
@@ -105,7 +105,7 @@ class Explosions{
         this.sound = new Audio();
         this.sound.src='boom.wav';
         this.timeSinceLastFrame =0;
-        this.frameInterval = 200;//200 milisec
+        this.frameInterval = 500;//200 milisec
         this.markedForDeletion=false;
 
     }
@@ -153,7 +153,7 @@ class Particle{
     update(){
         this.x+=this.speedX;
         this.radius+=0.5;
-        if(this.raidus>this.maxRadius-5) this.markedForDeletion=true;
+        if(this.radius>this.maxRadius-5) this.markedForDeletion=true;
     }
     draw(){
         ctx.save();//saves a snapshot
@@ -173,7 +173,31 @@ function drawScore(){
     ctx.fillText('Score: '+score, 55,80)//hardcoding string
 }
 
-window.addEventListener('click', function(e){//for shooting ravens
+
+window.addEventListener('click', function(e){
+    console.log(e.x, e.y);
+    const detectPixelColor = collisionCtx.getImageData(e.x, e.y, 1, 1);
+    console.log(detectPixelColor);
+
+    const pc = detectPixelColor.data;
+
+    ravens.forEach(
+        object => {
+            if(object.randomColors[0] === pc[0] && object.randomColors[1] === pc[1] && object.randomColors[2] === pc[2]){
+                object.markedForDeletion= true;
+
+                score++;
+
+            }
+        }
+    )
+    
+    
+
+
+});
+
+/*window.addEventListener('click', function(e){//for shooting ravens
     //const detectPC = collisionCanvas;
     const detectPixelColor = collisionCtx.getImageData(e.x, e.y, 1, 1);//detects pixels color, getImageData scans the canvas and returns an array like object called Uint8 -> it contais unsighned 8 bit integeres
     //console.log('hi');
@@ -200,14 +224,16 @@ window.addEventListener('click', function(e){//for shooting ravens
 
 });
 
+*/
+
 
 function animate(timestamp){//takes values in milliseconds
     //timestamp behavior is a default javascript behaviour when using request animation frame (animate)
     //as the loop runs requestAnimationFrame runs over and over and animate becomes the call backfunction here
     ctx.clearRect(0,0,canvas.width,canvas.height);
     collisionCtx.clearRect(0,0,canvas.width,canvas.height);
-    let deltaTime=0;
-    deltaTime= timestamp -lastTime;
+    //let deltaTime=0;
+    let deltaTime= timestamp -lastTime;
     lastTime - timestamp;
     timeToNextRaven+=deltaTime;
     //console.log(deltaTime);
