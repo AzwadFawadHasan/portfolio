@@ -12,7 +12,7 @@ collisionCanvas.height = window.innerHeight;
 
 
 let timeToNextRaven =0; //helper varaible, this acuumulates milisec values between frames until it reaches our interval value and triggers next frame
-let ravenInterval = 9000;
+let ravenInterval = 20000;
 let lastTime=0;
 let gameOver =false;
 ctx.font = '50px Impact'; 
@@ -128,11 +128,16 @@ class Explosions{
 }
 
 function drawGameOver(){
+    
+    
+    
     ctx.textAlign ='center';
     ctx.fillStyle='black';
     ctx.fillText('Game Over, your score is ' + score , canvas.width/2, canvas.height/2);
     ctx.fillStyle='white';
     ctx.fillText('Game Over, your score is ' + score , canvas.width/2 +5, canvas.height/2 + 5);
+    
+    
 }
 
 let particles =[];
@@ -168,10 +173,13 @@ class Particle{
 }
 
 function drawScore(){
+    
     ctx.fillStyle='black';//for white numbers
     ctx.fillText('Score: '+score, 50,75);//hardcoding string
     ctx.fillStyle='white';//for white numbers
     ctx.fillText('Score: '+score, 55,80)//hardcoding string
+    
+    
 }
 
 
