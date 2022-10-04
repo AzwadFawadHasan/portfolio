@@ -96,8 +96,9 @@ class Explosions{
     constructor(x,y,size){
         this.image = new Image();
         this.image.src = 'boom.png';
-        this.spriteHeight=179;
         this.spriteWidth = 200; 
+        this.spriteHeight=179;
+        
         this.size =size;
         this.x=x;
         this.y=y;
@@ -105,7 +106,7 @@ class Explosions{
         this.sound = new Audio();
         this.sound.src='boom.wav';
         this.timeSinceLastFrame =0;
-        this.frameInterval = 500;//200 milisec
+        this.frameInterval = 200;//200 milisec
         this.markedForDeletion=false;
 
     }
@@ -187,7 +188,8 @@ window.addEventListener('click', function(e){
                 object.markedForDeletion= true;
 
                 score++;
-
+                explosions.push(new Explosions(object.x, object.y, object.width));
+                console.log(explosions);
             }
         }
     )
