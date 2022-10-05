@@ -59,15 +59,15 @@ class Raven{
         if (this.x <0  - this.width){//meaning it has moved all the way to the left of the screen
             this.markedForDeletion= true;        
         }
-        this.timeSinceFlap += deltaTime;//unifies animation speed in fast and slow devices both
+        this.timeSinceFlap += deltaTime + Math.random() * 100 +90;//unifies animation speed in fast and slow devices both
         if(this.timeSinceFlap> this.flapInterval){
 
             if (this.frame > this.maxFrame){
-                this.frame=0;
+                this.frame=0 ;
             }else{
                 this.frame++;
             }
-            this.timeSinceFlap=0;
+            this.timeSinceFlap=0 ;
             if(this.hasTrail){
                 for(let i =0 ; i <5; i++){
 
@@ -110,9 +110,9 @@ class Explosions{
         this.markedForDeletion=false;
 
     }
-    update(deltatime){
+    update(deltaTime){
         if(this.frame===0)this.sound.play();
-        this.timeSinceLastFrame += deltatime;
+        this.timeSinceLastFrame += deltaTime;
         if(this.timeSinceLastFrame>this.frameInterval){
             this.frame++;
             this.timeSinceLastFrame=0;
@@ -237,15 +237,15 @@ window.addEventListener('click', function(e){
 */
 
 
-function animate(timestamp){//takes values in milliseconds
+function animate(timeStamp){//takes values in milliseconds
     //timestamp behavior is a default javascript behaviour when using request animation frame (animate)
     //as the loop runs requestAnimationFrame runs over and over and animate becomes the call backfunction here
     ctx.clearRect(0,0,canvas.width,canvas.height);
     collisionCtx.clearRect(0,0,canvas.width,canvas.height);
     //let deltaTime=0;
-    let deltaTime= timestamp -lastTime;
-    lastTime - timestamp;
-    timeToNextRaven+=deltaTime;
+    let deltaTime= timeStamp -lastTime;
+    lastTime =timeStamp;
+    timeToNextRaven+=deltaTime + Math.random()*1000;
     //console.log(deltaTime);
     if(timeToNextRaven > ravenInterval){
         ravens.push(new Raven());
