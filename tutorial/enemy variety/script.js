@@ -27,7 +27,7 @@ class Game{
 
     }
     update(deltaTime){
-        this.enemies = this.enemies.filter(object => !object.markedForDeletion)
+        this.enemies = this.enemies.filter(object => ! object.markedForDeletion)
         //.filter() method manipulates arrays
         //creates a new array with old elements, that pass the condition
         if(this.enemyTimer > this.enemyInterval){
@@ -47,7 +47,7 @@ class Game{
     }
     #addNewEnemy(){//a private method
 
-        this.enemies.push(new Enemy(this));//passing this keyword allows us to pass everything inside the constructor of the game class
+        this.enemies.push(new Worm(this));//passing this keyword allows us to pass everything inside the constructor of the game class
 
 
  
@@ -75,12 +75,28 @@ class Enemy{
 
     }
     draw(ctx){//this way this draw() method is using this.ctx that was passed along from the game object rather than passing global ctx
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-
-
+        //ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.image,0,0,this.spriteWidth, this.spriteHeight,this.x, this.y, this.width, this.height);
+        //0=sx, 0=sy as we are just cropping the first frame from the sprite sheet
     }
 
 }
+
+
+class Worm extends Enemy {
+    constructor(game){//constructor expects game as an arguement
+
+        super(game); //take all code from enemy constructor and use it here
+        this.image = worm;// we must always declare super first  and run parent constructor first  otherwise will get a reference error
+        this.spriteWidth=229;
+        this.spriteHeight=171;
+        this.x=this.game.width;//will be at the start of the canvas // so that canvas knows where to draw them on canvas
+        this.y=Math.random() * this.game.height;
+        this.width=this.spriteWidth/2;
+        this.height=this.spriteHeight/2;
+    }
+}
+
 
 const game = new Game(ctx, canvas.width, canvas.height);    
 let lastTime=1;
