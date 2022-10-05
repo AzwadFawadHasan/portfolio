@@ -4,10 +4,25 @@ canvas.width = 500;
 canvas.height = 800;
 
 
-const collisionCanvas = document.getElementById('collisionCanvas');
-const collisionCtx = collisionCanvas.getContext('2d',{willReadFrequently: true});
-collisionCanvas.width = window.innerWidth;
-collisionCanvas.height = window.innerHeight;
+//const collisionCanvas = document.getElementById('collisionCanvas');
+//const collisionCtx = collisionCanvas.getContext('2d',{willReadFrequently: true});
+//collisionCanvas.width = window.innerWidth;
+//collisionCanvas.height = window.innerHeight;
+
+class Game{
+    constructor(){
+        this.enemies = [];
+        
+
+    }
+    update(){
+
+    }
+
+    draw(){
+
+    }
+}
 
 
 
