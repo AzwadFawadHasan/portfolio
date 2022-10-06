@@ -22,6 +22,7 @@ class Game{
         
         this.enemyInterval =1000; //defines the number of millisec before adding a new enemy to the game
         this.enemyTimer =0;//will count milisec from 0 to 400 over and over;
+        this.enemyTypes= ['worm','ghost'];
         console.log(this.enemies);
 
 
@@ -46,8 +47,10 @@ class Game{
 
     }
     #addNewEnemy(){//a private method
-
-        this.enemies.push(new Worm(this));//passing this keyword allows us to pass everything inside the constructor of the game class
+        const randomEnemy = this.enemyTypes[Math.floor(Math.random() * this.enemyTypes.length)];
+        if(randomEnemy=='worm')this.enemies.push(new Worm(this));//passing this keyword allows us to pass everything inside the constructor of the game class
+        else if (randomEnemy=='ghost')this.enemies.push(new Ghost(this));
+        
         //we can now see that some of the worms are being spawned on top of other ones. This doens't look nice.
         //we will sort the array interms of their index number, ie their height/
         //we want works with lower y coordinate to be drawn first in this case hence
