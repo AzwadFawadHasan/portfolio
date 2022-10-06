@@ -101,13 +101,13 @@ class Player{
 
         });
         // //sprite animating
-        if(this.framTimer> this.frameInterval){
+        if(this.frameTimer> this.frameInterval){
             if(this.frameX >= this.maxFrame)this.frameX=0;
             else this.frameX++;
             this.frameTimer=0;
         }
         else{
-            this.framTimer+=deltaTime;
+            this.frameTimer+=deltaTime;
         }
         
         
