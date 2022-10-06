@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){//benefit of using an a
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');// this is the instance of built in canvas 2D api that holds all drawing methods and properties we need to animate our game
-canvas.width = 1300;
+canvas.width = 1400;
 canvas.height = 720;
 let enemies = [];
 let gameOver= false;
@@ -18,12 +18,17 @@ let score = 0;
 class InputHandler{//puts event listeners  to keyboard events and holds arrays of all active keys
     constructor(){
         this.keys = [];//array helps to add and remove key presses
+        this.touchY=''; //initial startign coorodinates
+        this.touchTreshold=30;//to make sure only longer swipes are detected
+
         window.addEventListener('keydown', e =>{
             //console.log(e.key);
             if(
                 (e.key === 'ArrowDown' || e.key ==='ArrowUp' || e.key=== 'ArrowLeft' || e.key === 'ArrowRight')
              && this.keys.indexOf(e.key)=== -1){// this means this.key which is arrow donwn is not present in the array
                 this.keys.push(e.key);
+            }else if (e.key ==='Enter' && gameOver){
+                restartGame();
             }
             console.log(e.key, this.keys);  
             //ES6 arrow functions don't bind their own 'this' but
@@ -44,6 +49,30 @@ class InputHandler{//puts event listeners  to keyboard events and holds arrays o
             }
            // console.log(e.key, this.keys);  
           
+        });
+
+        window.addEventListener('touchstart', e=> {
+            //console.log(e.changedTouches[0].pageY);
+            this.touchY = e.changedTouches[0].pageY;
+        });
+
+        window.addEventListener('touchmove', e=> {
+            const swipeDistance =  e.changedTouches[0].pageY- this.touchY;
+            if(swipeDistance < -this.touchTreshold && this.keys.indexOf('swipe up') === -1){//checks whether user swiped up// at the same time we want to check if swipe up is NOT in the keys array
+                this.keys.push('swipe up');
+            }
+            else if(swipeDistance> this.touchTreshold &&  this.keys.indexOf('swipe up') === -1 ){
+                this.keys.push('swipe down');
+                if(gameOver){restartGame();}
+            }
+        });
+
+        window.addEventListener('touchend', e=> {
+            //console.log(e.changedTouches[0].pageY);
+            
+            this.keys.splice(this.keys.indexOf('swipe up'), 1);
+            this.keys.splice(this.keys.indexOf('swipe down'), 1);
+            
         });
     }
 }
@@ -68,6 +97,13 @@ class Player{
         this.frameTimer=0;//counts from 0 to frame interval
         this.frameInterval=1000/this.fps;//its a value of how many second each frame last
         //this.speed =Math.random()* 8;
+
+    }
+    restart(){
+        this.x=100;
+        this.y = this.gameHeight- this.height;
+        this.maxFrame=8;
+        this.frameY=0;
 
     }
     draw(context){
@@ -114,12 +150,12 @@ class Player{
        
 
         //controls
-        if(input.keys.indexOf('ArrowRight') > -1){
+        if((input.keys.indexOf('ArrowRight') > -1) ){
             this.speed =5;
         }else if(input.keys.indexOf('ArrowLeft') > -1){
             this.speed=-5;
         }
-        else if(input.keys.indexOf('ArrowUp') > -1
+        else if((input.keys.indexOf('ArrowUp') > -1) || (input.keys.indexOf('swipe up') > -1)
             && this.onGround()                                        
         ){
             this.vy+=-32;
@@ -185,6 +221,9 @@ class Background{
             this.x=0;
         }
 
+    }
+    restart(){
+        this.x=0;
     }
 }
 
@@ -269,9 +308,9 @@ function displayStatusText(context){//gonna display the score
     if(gameOver){
         context.textAlign = 'center';
         context.fillStyle = 'red';
-        context.fillText('GAME OVER hahahah!', (canvas.width/2 -2), (canvas.height/2 -2));
+        context.fillText('GAME OVER hahahah! Press Enter', (canvas.width/2 -2), (canvas.height/2 -2));
         context.fillStyle = 'black';
-        context.fillText('GAME OVER hahahah!', canvas.width/2, canvas.height/2);
+        context.fillText('GAME OVER hahahah!  Press Enter', canvas.width/2, canvas.height/2);
     }
 }
 
@@ -279,6 +318,17 @@ const input = new InputHandler();
 const player = new Player(canvas.width, canvas.height);
 const background = new Background(canvas.width, canvas.height); 
 const enemy1 = new Enemy(canvas.width, canvas.height);
+
+function restartGame(){
+    player.restart(); 
+    background.restart();
+    enemies=[];
+    score=0; 
+    gameOver=false;
+    animate(0);
+
+     
+}
 
 let lastTime=0;
 let enemyTimer=0;
