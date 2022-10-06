@@ -22,7 +22,7 @@ class Game{
         
         this.enemyInterval =1000; //defines the number of millisec before adding a new enemy to the game
         this.enemyTimer =0;//will count milisec from 0 to 400 over and over;
-        this.enemyTypes= ['worm','ghost'];
+        this.enemyTypes= ['worm','ghost', 'spider'];
         console.log(this.enemies);
 
 
@@ -50,6 +50,7 @@ class Game{
         const randomEnemy = this.enemyTypes[Math.floor(Math.random() * this.enemyTypes.length)];
         if(randomEnemy=='worm')this.enemies.push(new Worm(this));//passing this keyword allows us to pass everything inside the constructor of the game class
         else if (randomEnemy=='ghost')this.enemies.push(new Ghost(this));
+        else if (randomEnemy=='spider')this.enemies.push(new Spider(this));
         
         //we can now see that some of the worms are being spawned on top of other ones. This doens't look nice.
         //we will sort the array interms of their index number, ie their height/
@@ -108,6 +109,30 @@ class Worm extends Enemy {
 }
 
 
+class Spider extends Enemy {
+    constructor(game){//constructor expects game as an arguement
+
+        super(game); //take all code from enemy constructor and use it here
+        this.image = spider;//comes from the id of html
+        this.spriteWidth=310;
+        this.spriteHeight=175;
+        this.width=this.spriteWidth/2;
+        this.height=this.spriteHeight/2;       
+        this.x=Math.random ()* this.game.width;//will be at the start of the canvas // so that canvas knows where to draw them on canvas
+        this.y=0- this.height;//we want spiders to start from the top edge hence the 0-height
+        
+        this.vx=0;//randomizing the speed of worms to the left of canvas
+        this.vy =Math.random()*0.1+0.1;//velocity in y axis
+        this.maxLength=Math.random()*this.game.height-this.height;
+    }
+    update(deltaTime){
+        super.update(deltaTime);
+        this.y+=this.vy *deltaTime; 
+        if(this.y>this.maxLength) this.vy*=-1;//making spider move up and down
+    }
+}
+
+
 
 class Ghost extends Enemy {
     constructor(game){//constructor expects game as an arguement
@@ -131,7 +156,7 @@ class Ghost extends Enemy {
         this.angle+=0.04;//curve of ghosts
 
     }
-    draw(){
+    draw(ctx){
         ctx.save();
         ctx.globalAlpha = 0.5;
         super.draw(ctx);
