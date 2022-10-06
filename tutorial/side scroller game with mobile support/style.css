@@ -1,8 +1,9 @@
-
+body{background:black;}
 
 #canvas1 {
-    border: 3px solid black;
-
+    background: blue;
+    position:absolute;
+    
    
     width:500px;
     height:700px;
@@ -10,12 +11,11 @@
     top:50%;
     left:50%;
     transform:translate(-50%, -50%); 
+    border:5px solid white;
+
  
 }
 
-img{
+#playerImage, #backgroundImage, #enemyImage{
     display:none;
 }
-
-
-
