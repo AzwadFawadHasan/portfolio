@@ -61,7 +61,11 @@ class Player{
         this.speed=0;
         this.vy =0; //velocity in y axis meaning jump
         this.weight = 1;
-
+        this.maxFrame=8;
+        this.fps=20;
+        this.frameTimer=0;//counts from 0 to frame interval
+        this.frameInterval=1000/this.fps;//its a value of how many second each frame last
+        //this.speed =Math.random()* 8;
 
     }
     draw(context){
@@ -72,9 +76,21 @@ class Player{
 
 
     }
-    update(input){
-        //horizontal movement
+    update(input, deltaTime){
+        // //sprite animating
+        if(this.framTimer> this.frameInterval){
+            if(this.frameX >= this.maxFrame)this.frameX=0;
+            else this.frameX++;
+            this.frameTimer=0;
+        }
+        else{
+            this.framTimer+=deltaTime;
+        }
+        
+        
        
+
+        //controls
         if(input.keys.indexOf('ArrowRight') > -1){
             this.speed =5;
         }else if(input.keys.indexOf('ArrowLeft') > -1){
@@ -104,12 +120,14 @@ class Player{
         //vertical movement
         this.y+= this.vy;
         if(!this.onGround()){//if player is in the air
+            this.maxFrame=5
             this.vy+=this.weight;
             this.frameY=1;//changes animation of dog
 
 
         }else{
             this.vy=0;
+            this.maxFrame=8;
             this.frameY=0;
         }
         if(this.y > this.gameHeight-this.height){
@@ -159,14 +177,27 @@ class Enemy{
         this.y=this.gameHeight- this.height;
         this.frameX=0;
         this.frameY=0;
+        this.maxFrame=5;
+        
+        //to time frame rate with delta time we need 3 helper variuables
+        this.fps=20;
+        this.frameTimer=0;//counts from 0 to frame interval
+        this.frameInterval=1000/this.fps;//its a value of how many second each frame last
         this.speed =Math.random()* 8;
 
     }
     draw(context){
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height,this.x, this.y, this.width, this.height);//we call built in draw image method
     }   
-    update(){
-        this.x-=this.speed;
+    update(deltaTime){
+        if(this.frameTimer> this.frameInterval){
+            if(this.frameX >= this.maxFrame)this.frameX=0;
+            this.x-=this.speed;
+            this.frameTimer=0;
+        }
+        else{
+            this.frameTimer+=deltaTime;
+        }
     }
 
 }
@@ -185,7 +216,7 @@ function handleEnemies(deltaTime){
     
     enemies.forEach(enemy =>{
         enemy.draw(ctx);
-        enemy.update();
+        enemy.update(deltaTime);
 
     })
 }
@@ -213,7 +244,7 @@ function animate(timeStamp){
     background.draw(ctx);
     background.update();
     player.draw(ctx);
-    player.update(input);
+    player.update(input, deltaTime);
     handleEnemies(deltaTime);
     //enemy1.draw(ctx);
     //enemy1.update();
