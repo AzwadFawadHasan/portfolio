@@ -12,6 +12,7 @@ const ctx = canvas.getContext('2d');// this is the instance of built in canvas 2
 canvas.width = 500;
 canvas.height = 720;
 let enemies = [];
+let score = 0;
 
 class InputHandler{//puts event listeners  to keyboard events and holds arrays of all active keys
     constructor(){
@@ -69,6 +70,11 @@ class Player{
 
     }
     draw(context){
+        context.strokeStyle= 'white';
+        context.strokeRect(this.x, this.y, this.width, this.height);
+        context.beginPath();
+        context.arc(this.x+this.width/2, this.y+this.height/2, this.width/2, 0, Math.PI*2);
+        context.stroke();
         //context.fillStyle='white';
         //context.fillRect(this.x, this.y, this.width, this.height);
         context.drawImage(this.image,this.frameX  *this.width,this.frameY *this.height,this.width, this.height, this.x, this.y, this.width, this.height);
@@ -188,6 +194,11 @@ class Enemy{
 
     }
     draw(context){
+        context.strokeStyle= 'white';
+        context.strokeRect(this.x, this.y, this.width, this.height);
+        context.beginPath();
+        context.arc(this.x+this.width/2, this.y+this.height/2, this.width/2, 0, Math.PI*2);
+        context.stroke();
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height,this.x, this.y, this.width, this.height);//we call built in draw image method
     }   
     update(deltaTime){
@@ -200,7 +211,9 @@ class Enemy{
             this.frameTimer+=deltaTime;
         }
         this.x-=this.speed;
-        if(this.x<0 - this.width){this.markedForDeletion=true;}
+        if(this.x<0 - this.width){this.markedForDeletion=true;
+        score++;
+        }
     }
 
 }
@@ -226,8 +239,16 @@ function handleEnemies(deltaTime){
     enemies=enemies.filter(enemy=> !enemy.markedForDeletion);
 }
 
-function displayStatusText(){
+function displayStatusText(context){//gonna display the score
+
     //display score and lives
+    context.fillStyle='black';
+    context.font= '40px Helvetica';
+    context.fillText('Score: '+ score, 20,50)//fillText(text, x, y)
+    //second one used for shadow effect
+    context.fillStyle='white';
+    context.font= '40px Helvetica';
+    context.fillText('Score: '+ score, 22,52)//fillText(text, x, y)
 }
 
 const input = new InputHandler();
@@ -254,6 +275,7 @@ function animate(timeStamp){
     //enemy1.draw(ctx);
     //enemy1.update();
     //
+    displayStatusText(ctx);
     requestAnimationFrame(animate);
 }
 animate(0);
