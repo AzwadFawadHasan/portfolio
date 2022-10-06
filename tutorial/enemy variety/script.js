@@ -130,6 +130,18 @@ class Spider extends Enemy {
         this.y+=this.vy *deltaTime; 
         if(this.y>this.maxLength) this.vy*=-1;//making spider move up and down
     }
+    draw(ctx){
+        ctx.beginPath();
+        ctx.moveTo(this.x+this.width/2,,0);
+        
+
+        ctx.lineTo(this.x+this.width/2, this.y);
+        ctx.stroke();
+
+        super.draw(ctx);
+        
+
+    }
 }
 
 
