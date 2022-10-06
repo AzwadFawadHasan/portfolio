@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){//benefit of using an a
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');// this is the instance of built in canvas 2D api that holds all drawing methods and properties we need to animate our game
-canvas.width = 500;
+canvas.width = 1300;
 canvas.height = 720;
 let enemies = [];
 let gameOver= false;
