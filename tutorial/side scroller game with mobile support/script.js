@@ -14,6 +14,7 @@ canvas.height = 720;
 let enemies = [];
 let gameOver= false;
 let score = 0;
+const fullScreenButton = document.getElementById('fullScreenButton');
 
 class InputHandler{//puts event listeners  to keyboard events and holds arrays of all active keys
     constructor(){
