@@ -73,6 +73,10 @@ class Enemy{
         this.width=100;
         this.height=100;
         this.markedForDeletion=false;
+        this.frameX=0;//will cycle through 0 to the number of frames in the sprite image
+        this.maxFrame=5;//max same for all which is 5 as all the sprite images have 6 frames
+        this.frameInterval =100;
+        this.frameTimer=0;
 
     }
     update(deltaTime){
@@ -81,11 +85,25 @@ class Enemy{
             this.markedForDeletion= true;
         }
 
+        if(this.frameTimer>this.frameInterval){ 
+            if (this.frameX<this.maxFrame)this.frameX++;
+            else {
+                this.frameX=0;
+              
+            }
+            this.frameTimer=0;
+        } 
+        
+        else{
+            this.frameTimer+=deltaTime;
+        }
+
 
     }
     draw(ctx){//this way this draw() method is using this.ctx that was passed along from the game object rather than passing global ctx
         //ctx.fillRect(this.x, this.y, this.width, this.height);
-        ctx.drawImage(this.image,0,0,this.spriteWidth, this.spriteHeight,this.x, this.y, this.width, this.height);
+      
+        ctx.drawImage(this.image,this.frameX*this.spriteWidth,0,this.spriteWidth, this.spriteHeight,this.x, this.y, this.width, this.height);
         //0=sx, 0=sy as we are just cropping the first frame from the sprite sheet
     }
 
@@ -126,13 +144,15 @@ class Spider extends Enemy {
         this.maxLength=Math.random()*this.game.height-this.height;
     }
     update(deltaTime){
+
         super.update(deltaTime);
+        if (this.y<0 - this.height*2) this.markedForDeletion=true;
         this.y+=this.vy *deltaTime; 
         if(this.y>this.maxLength) this.vy*=-1;//making spider move up and down
     }
     draw(ctx){
         ctx.beginPath();
-        ctx.moveTo(this.x+this.width/2,,0);
+        ctx.moveTo(this.x+this.width/2,0);//starting cooridinates
         
 
         ctx.lineTo(this.x+this.width/2, this.y);
