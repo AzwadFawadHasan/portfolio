@@ -14,7 +14,7 @@ canvas.height = 720;
 let enemies = [];
 let gameOver= false;
 let score = 0;
-const fullScreenButton = document.getElementById('fullScreenButton');
+const fullScreenButton = document.getElementById('fullScreenButton');//bringing JavaScript's full screen api
 
 class InputHandler{//puts event listeners  to keyboard events and holds arrays of all active keys
     constructor(){
@@ -124,15 +124,15 @@ class Player{
         //collision detections
         enemies.forEach(enemy => {
             //collision detection betn player circle hitbox and enemy circlehitbox
-                const dx = (enemy.x  +enemy.width/2) - (this.x+ this.width/2);// to fix collision the distance on the horizontal x axis between two center points needs to be offset by half of enemy and half of player width)
+                const dx = (enemy.x  +enemy.width/2 -20) - (this.x+ this.width/2);// to fix collision the distance on the horizontal x axis between two center points needs to be offset by half of enemy and half of player width)
 
-                const dy = (enemy.y+enemy.height/2) - (this.y+this.height/2);
+                const dy = (enemy.y+enemy.height/2) - (this.y+this.height/2  + 20);
                 
                 const distance = Math.sqrt(dx*dx+dy*dy);//dy is adjacent
                 //dx is the horizontal triangle side
                 //hypotenisu is distance
                 //if distance  between center point of player circle and center point of enemy circle is less than the  radius of enemy circle then there is a collisoin
-                if(distance<enemy.width/2 + this.width/2){
+                if(distance<enemy.width/3 + this.width/3){
                     gameOver=true;
                 }
 
@@ -254,7 +254,7 @@ class Enemy{
         context.strokeStyle= 'white';
         context.strokeRect(this.x, this.y, this.width, this.height);
         context.beginPath();
-        context.arc(this.x+this.width/2, this.y+this.height/2, this.width/2, 0, Math.PI*2);
+        context.arc(this.x+this.width/2 -20, this.y+this.height/2, this.width/3, 0, Math.PI*2);
         context.stroke();
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height,this.x, this.y, this.width, this.height);//we call built in draw image method
     }   
@@ -330,6 +330,17 @@ function restartGame(){
 
      
 }
+
+function toggleFullScreen(){
+        if(!document.fullscreenElement){// is  a builtin read only property on document object that turns the lement that is currently being rpesented in full screen mode, if ti's null it means full dscreen is not active
+            canvas.requestFullscreen().catch(err=>{
+                alert(`error, can't enable fullscreen: ${err.message}`);
+            });//requestFullscreen is an asynchronous method. it returns a promise
+        }else{
+            document.exitFullscreen();
+        }
+}
+fullScreenButton.addEventListener('click', toggleFullScreen);
 
 let lastTime=0;
 let enemyTimer=0;
