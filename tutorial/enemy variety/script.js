@@ -37,7 +37,7 @@ class Game{
             this.enemyTimer+=deltaTime;//instead of hard coding +1 let's add Delta time this will make it more smother
 
         }
-        this.enemies.forEach(object => object.update());
+        this.enemies.forEach(object => object.update(deltaTime));
 
     }
 
@@ -48,7 +48,12 @@ class Game{
     #addNewEnemy(){//a private method
 
         this.enemies.push(new Worm(this));//passing this keyword allows us to pass everything inside the constructor of the game class
-
+        //we can now see that some of the worms are being spawned on top of other ones. This doens't look nice.
+        //we will sort the array interms of their index number, ie their height/
+        //we want works with lower y coordinate to be drawn first in this case hence
+        this.enemies.sort(function(a,b){
+            return a.y - b.y;
+        });
 
  
 
@@ -66,8 +71,8 @@ class Enemy{
         this.markedForDeletion=false;
 
     }
-    update(){
-        this.x--;//moves the enemy one pixel to the left of the canvas
+    update(deltaTime){
+        this.x-=this.vx *deltaTime;//moves the enemy one pixel to the left of the canvas
         if(this.x <0 - this.width){
             this.markedForDeletion= true;
         }
@@ -94,6 +99,7 @@ class Worm extends Enemy {
         this.y=Math.random() * this.game.height;
         this.width=this.spriteWidth/2;
         this.height=this.spriteHeight/2;
+        this.vx=Math.random() *0.1 +0.1;//randomizing the speed of worms to the left of canvas
     }
 }
 
