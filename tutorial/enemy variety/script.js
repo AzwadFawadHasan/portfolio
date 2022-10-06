@@ -98,10 +98,11 @@ class Worm extends Enemy {
         this.image = worm;// we must always declare super first  and run parent constructor first  otherwise will get a reference error
         this.spriteWidth=229;
         this.spriteHeight=171;
-        this.x=this.game.width;//will be at the start of the canvas // so that canvas knows where to draw them on canvas
-        this.y=Math.random() * this.game.height;
         this.width=this.spriteWidth/2;
-        this.height=this.spriteHeight/2;
+        this.height=this.spriteHeight/2;       
+        this.x=this.game.width;//will be at the start of the canvas // so that canvas knows where to draw them on canvas
+        this.y=this.game.height- this.height;
+        
         this.vx=Math.random() *0.1 +0.1;//randomizing the speed of worms to the left of canvas
     }
 }
