@@ -16,7 +16,7 @@ class InputHandler{//puts event listeners  to keyboard events and holds arrays o
     constructor(){
         this.keys = [];//array helps to add and remove key presses
         window.addEventListener('keydown', e =>{
-            console.log(e.key);
+            //console.log(e.key);
             if(
                 (e.key === 'ArrowDown' || e.key ==='ArrowUp' || e.key=== 'ArrowLeft' || e.key === 'ArrowRight')
              && this.keys.indexOf(e.key)=== -1){// this means this.key which is arrow donwn is not present in the array
@@ -29,16 +29,17 @@ class InputHandler{//puts event listeners  to keyboard events and holds arrays o
         });
 
         window.addEventListener('keyup', e =>{
-            console.log(e.key);
-            if((e.key === 'ArrowDown' || e.key ==='ArrowUp' || e.key=== 'ArrowLeft' || e.key === 'ArrowRight')
-                 && this.keys.indexOf(e.key)=== -1){// this means this.key which is arrow donwn is not present in the array
+            //console.log(e.key);
+            if(
+                (e.key === 'ArrowDown' || e.key ==='ArrowUp' || e.key=== 'ArrowLeft' || e.key === 'ArrowRight')
+                 ){// this means this.key which is arrow donwn is not present in the array
                 this.keys.splice(this.keys.indexOf(e.key),1);//if key that was RELEASED was arrow down we want to remove it from htre array
             
             //splice takes 2 arguments index of key that needs to be removed
             // and how many elements starting from that index we want to remove
             //1 means to remove 1 element from tthat array
             }
-            console.log(e.key, this.keys);  
+           // console.log(e.key, this.keys);  
           
         });
     }
@@ -46,6 +47,41 @@ class InputHandler{//puts event listeners  to keyboard events and holds arrays o
 
 class Player{
     //player class will react to these keys
+    constructor(gameWidth, gameHeight){//player object needs to be aware of game boundaries hence we are adding width and height to it
+        this.gameWidth=gameWidth;
+        this.gameHeight=gameHeight;
+        this.width = 200;//200px in sprite sheet
+        this.height = 200;//
+        this.x=10;
+        this.y=this.gameHeight- this.height;
+        this.image = document.getElementById('playerImage');
+        this.frameX = 0;
+        this.frameY = 0;
+        this.speed=0;
+
+
+    }
+    draw(context){
+        context.fillStyle='white';
+        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(this.image,this.frameX  *this.width,this.frameY *this.height,this.width, this.height, this.x, this.y, this.width, this.height);
+        
+
+
+    }
+    update(input){
+        //horizontal movement
+        this.x  += this.speed;
+        if(input.keys.indexOf('ArrowRight') > -1){
+            this.speed =5;
+        }else if(input.keys.indexOf('ArrowLeft') > -1){
+            this.speed=-5;
+        }
+        else{
+            this.speed=0;
+           
+        }
+    }
 }
 
 class Background{
@@ -67,10 +103,16 @@ function displayStatusText(){
 }
 
 const input = new InputHandler();
+const player = new Player(canvas.width, canvas.height);
+
 
 function animate(){
     //UPDATES    and draws enemeies over and over
+    ctx.clearRect(0,0, canvas.width, canvas.height);
+    player.draw(ctx);
+    player.update(input);
+    requestAnimationFrame(animate);
 }
-
+animate();
 
 });
