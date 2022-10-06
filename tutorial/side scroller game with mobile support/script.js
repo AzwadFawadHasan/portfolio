@@ -11,6 +11,7 @@ const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');// this is the instance of built in canvas 2D api that holds all drawing methods and properties we need to animate our game
 canvas.width = 500;
 canvas.height = 720;
+let enemies = [];
 
 class InputHandler{//puts event listeners  to keyboard events and holds arrays of all active keys
     constructor(){
@@ -64,8 +65,8 @@ class Player{
 
     }
     draw(context){
-        context.fillStyle='white';
-        context.fillRect(this.x, this.y, this.width, this.height);
+        //context.fillStyle='white';
+        //context.fillRect(this.x, this.y, this.width, this.height);
         context.drawImage(this.image,this.frameX  *this.width,this.frameY *this.height,this.width, this.height, this.x, this.y, this.width, this.height);
         
 
@@ -148,12 +149,45 @@ class Background{
 
 class Enemy{
 //contains enemy properties
+    constructor(gameWidth, gameHeight){
+        this.gameWidth=gameWidth;
+        this.gameHeight= gameHeight;
+        this.width=160;
+        this.height=119;
+        this.image= document.getElementById('enemyImage');
+        this.x=this.gameWidth;
+        this.y=this.gameHeight- this.height;
+        this.frameX=0;
+        this.frameY=0;
+        this.speed =Math.random()* 8;
+
+    }
+    draw(context){
+        context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height,this.x, this.y, this.width, this.height);//we call built in draw image method
+    }   
+    update(){
+        this.x-=this.speed;
+    }
+
 }
 
 
-function handdleEnemies(){
+function handleEnemies(deltaTime){
     //seperate function to handle enemies,
     //like adding and removing enemies
+    if(enemyTimer>enemyInterval){
+        enemies.push(new Enemy(canvas.width, canvas.height));
+        enemyTimer=0;
+
+    }else{
+        enemyTimer+= deltaTime;
+    }
+    
+    enemies.forEach(enemy =>{
+        enemy.draw(ctx);
+        enemy.update();
+
+    })
 }
 
 function displayStatusText(){
@@ -163,17 +197,29 @@ function displayStatusText(){
 const input = new InputHandler();
 const player = new Player(canvas.width, canvas.height);
 const background = new Background(canvas.width, canvas.height); 
+const enemy1 = new Enemy(canvas.width, canvas.height);
 
-function animate(){
+let lastTime=0;
+let enemyTimer=0;
+let enemyInterval = 2000;//every thousand milisecs
+let randomEnemyInterval = Math.random()* 1000+500;
+
+
+function animate(timeStamp){
     //UPDATES    and draws enemeies over and over
+    const deltaTime = timeStamp - lastTime;
+    lastTime= timeStamp;
     ctx.clearRect(0,0, canvas.width, canvas.height);
     background.draw(ctx);
     background.update();
     player.draw(ctx);
     player.update(input);
-    
+    handleEnemies(deltaTime);
+    //enemy1.draw(ctx);
+    //enemy1.update();
+    //
     requestAnimationFrame(animate);
 }
-animate();
+animate(0);
 
 });
