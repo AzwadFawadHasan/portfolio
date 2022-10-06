@@ -87,8 +87,9 @@ class Player{
         //collision detections
         enemies.forEach(enemy => {
             //collision detection betn player circle hitbox and enemy circlehitbox
-                const dx = enemy.x  - this.x;
-                const dy = enemy.y - this.y;
+                const dx = (enemy.x  +enemy.width/2) - (this.x+ this.width/2);// to fix collision the distance on the horizontal x axis between two center points needs to be offset by half of enemy and half of player width)
+
+                const dy = (enemy.y+enemy.height/2) - (this.y+this.height/2);
                 
                 const distance = Math.sqrt(dx*dx+dy*dy);//dy is adjacent
                 //dx is the horizontal triangle side
