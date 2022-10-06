@@ -12,6 +12,7 @@ const ctx = canvas.getContext('2d');// this is the instance of built in canvas 2
 canvas.width = 500;
 canvas.height = 720;
 let enemies = [];
+let gameOver= false;
 let score = 0;
 
 class InputHandler{//puts event listeners  to keyboard events and holds arrays of all active keys
@@ -82,7 +83,22 @@ class Player{
 
 
     }
-    update(input, deltaTime){
+    update(input, deltaTime, enemeies){
+        //collision detections
+        enemies.forEach(enemy => {
+            //collision detection betn player circle hitbox and enemy circlehitbox
+                const dx = enemy.x  - this.x;
+                const dy = enemy.y - this.y;
+                
+                const distance = Math.sqrt(dx*dx+dy*dy);//dy is adjacent
+                //dx is the horizontal triangle side
+                //hypotenisu is distance
+                //if distance  between center point of player circle and center point of enemy circle is less than the  radius of enemy circle then there is a collisoin
+                if(distance<enemy.width/2 + this.width/2){
+                    gameOver=true;
+                }
+
+        });
         // //sprite animating
         if(this.framTimer> this.frameInterval){
             if(this.frameX >= this.maxFrame)this.frameX=0;
@@ -249,6 +265,13 @@ function displayStatusText(context){//gonna display the score
     context.fillStyle='white';
     context.font= '40px Helvetica';
     context.fillText('Score: '+ score, 22,52)//fillText(text, x, y)
+    if(gameOver){
+        context.textAlign = 'center';
+        context.fillStyle = 'red';
+        context.fillText('GAME OVER hahahah!', (canvas.width/2 -2), (canvas.height/2 -2));
+        context.fillStyle = 'black';
+        context.fillText('GAME OVER hahahah!', canvas.width/2, canvas.height/2);
+    }
 }
 
 const input = new InputHandler();
@@ -270,13 +293,14 @@ function animate(timeStamp){
     background.draw(ctx);
     background.update();
     player.draw(ctx);
-    player.update(input, deltaTime);
+    player.update(input, deltaTime, enemies);//adding enemies as parameter for collision detections
     handleEnemies(deltaTime);
     //enemy1.draw(ctx);
     //enemy1.update();
     //
     displayStatusText(ctx);
-    requestAnimationFrame(animate);
+    if(!gameOver){ requestAnimationFrame(animate);}
+   
 }
 animate(0);
 
