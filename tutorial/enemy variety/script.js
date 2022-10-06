@@ -101,7 +101,7 @@ class Worm extends Enemy {
         this.width=this.spriteWidth/2;
         this.height=this.spriteHeight/2;       
         this.x=this.game.width;//will be at the start of the canvas // so that canvas knows where to draw them on canvas
-        this.y=this.game.height- this.height;
+        this.y=this.game.height- this.height;//this makes the worms move only on the ground
         
         this.vx=Math.random() *0.1 +0.1;//randomizing the speed of worms to the left of canvas
     }
@@ -117,7 +117,7 @@ class Ghost extends Enemy {
         this.spriteWidth=261;
         this.spriteHeight=209;
         this.x=this.game.width;//will be at the start of the canvas // so that canvas knows where to draw them on canvas
-        this.y=Math.random() * this.game.height;
+        this.y=Math.random() * this.game.height *0.6;// I want the ghost to take up only top 60 percent of the game, so that they don't fly too close to the worms
         this.width=this.spriteWidth/2;
         this.height=this.spriteHeight/2;
         this.vx=Math.random() *0.2 +0.1;//randomizing the speed of worms to the left of canvas
