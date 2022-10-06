@@ -40,9 +40,9 @@ class InputHandler{//puts event listeners  to keyboard events and holds arrays o
         window.addEventListener('keyup', e =>{
             //console.log(e.key);
             if(
-                (e.key === 'ArrowDown' || e.key ==='ArrowUp' || e.key=== 'ArrowLeft' || e.key === 'ArrowRight')
+                ((e.key === 'ArrowDown') || (e.key ==='ArrowUp' )|| (e.key=== 'ArrowLeft') || (e.key === 'ArrowRight'))
                  ){// this means this.key which is arrow donwn is not present in the array
-                this.keys.splice(this.keys.indexOf(e.key),1);//if key that was RELEASED was arrow down we want to remove it from htre array
+                        this.keys.splice(this.keys.indexOf(e.key),1);//if key that was RELEASED was arrow down we want to remove it from htre array
             
             //splice takes 2 arguments index of key that needs to be removed
             // and how many elements starting from that index we want to remove
@@ -92,7 +92,7 @@ class Player{
         this.frameY = 0;
         this.speed=0;
         this.vy =0; //velocity in y axis meaning jump
-        this.weight = 1;
+        this.weight = 2;
         this.maxFrame=8;
         this.fps=20;
         this.frameTimer=0;//counts from 0 to frame interval
@@ -108,11 +108,11 @@ class Player{
 
     }
     draw(context){
-        context.strokeStyle= 'white';
-        context.strokeRect(this.x, this.y, this.width, this.height);
-        context.beginPath();
-        context.arc(this.x+this.width/2, this.y+this.height/2, this.width/2, 0, Math.PI*2);
-        context.stroke();
+        //context.strokeStyle= 'white';
+        //context.strokeRect(this.x, this.y, this.width, this.height);
+        //context.beginPath();
+        //context.arc(this.x+this.width/2, this.y+this.height/2, this.width/2, 0, Math.PI*2);
+        //context.stroke();
         //context.fillStyle='white';
         //context.fillRect(this.x, this.y, this.width, this.height);
         context.drawImage(this.image,this.frameX  *this.width,this.frameY *this.height,this.width, this.height, this.x, this.y, this.width, this.height);
@@ -156,10 +156,8 @@ class Player{
         }else if(input.keys.indexOf('ArrowLeft') > -1){
             this.speed=-5;
         }
-        else if((input.keys.indexOf('ArrowUp') > -1) || (input.keys.indexOf('swipe up') > -1)
-            && this.onGround()                                        
-        ){
-            this.vy+=-32;
+        else if((input.keys.indexOf('ArrowUp') > -1) || ((input.keys.indexOf('swipe up') ) > -1) && (this.onGround()) ){
+            this.vy+=-3;
         }   
         else{
             this.speed=0;
@@ -169,7 +167,7 @@ class Player{
 
 
 
-        this.x  += this.speed;
+        this.x+=this.speed;
 
         if(this.x< 0){
             this.x=0;
@@ -251,11 +249,11 @@ class Enemy{
 
     }
     draw(context){
-        context.strokeStyle= 'white';
-        context.strokeRect(this.x, this.y, this.width, this.height);
-        context.beginPath();
-        context.arc(this.x+this.width/2 -20, this.y+this.height/2, this.width/3, 0, Math.PI*2);
-        context.stroke();
+        //context.strokeStyle= 'white';
+        //context.strokeRect(this.x, this.y, this.width, this.height);
+        //context.beginPath();
+        //context.arc(this.x+this.width/2 -20, this.y+this.height/2, this.width/3, 0, Math.PI*2);
+        //context.stroke();
         context.drawImage(this.image, this.frameX * this.width, 0, this.width, this.height,this.x, this.y, this.width, this.height);//we call built in draw image method
     }   
     update(deltaTime){
