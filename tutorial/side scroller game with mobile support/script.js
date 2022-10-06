@@ -184,6 +184,7 @@ class Enemy{
         this.frameTimer=0;//counts from 0 to frame interval
         this.frameInterval=1000/this.fps;//its a value of how many second each frame last
         this.speed =Math.random()* 8;
+        this.markedForDeletion=false;
 
     }
     draw(context){
@@ -192,12 +193,14 @@ class Enemy{
     update(deltaTime){
         if(this.frameTimer> this.frameInterval){
             if(this.frameX >= this.maxFrame)this.frameX=0;
-            this.x-=this.speed;
+            this.frameX++;
             this.frameTimer=0;
         }
         else{
             this.frameTimer+=deltaTime;
         }
+        this.x-=this.speed;
+        if(this.x<0 - this.width){this.markedForDeletion=true;}
     }
 
 }
@@ -209,6 +212,7 @@ function handleEnemies(deltaTime){
     if(enemyTimer>enemyInterval){
         enemies.push(new Enemy(canvas.width, canvas.height));
         enemyTimer=0;
+        console.log(enemies);
 
     }else{
         enemyTimer+= deltaTime;
@@ -218,7 +222,8 @@ function handleEnemies(deltaTime){
         enemy.draw(ctx);
         enemy.update(deltaTime);
 
-    })
+    });
+    enemies=enemies.filter(enemy=> !enemy.markedForDeletion);
 }
 
 function displayStatusText(){
