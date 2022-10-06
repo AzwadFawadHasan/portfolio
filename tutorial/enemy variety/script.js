@@ -54,10 +54,10 @@ class Game{
         //we can now see that some of the worms are being spawned on top of other ones. This doens't look nice.
         //we will sort the array interms of their index number, ie their height/
         //we want works with lower y coordinate to be drawn first in this case hence
-        this.enemies.sort(function(a,b){
-            return a.y - b.y;
-        });
-
+        //this.enemies.sort(function(a,b){
+        //    return a.y - b.y;
+        //});
+//
  
 
     }
@@ -121,6 +121,13 @@ class Ghost extends Enemy {
         this.width=this.spriteWidth/2;
         this.height=this.spriteHeight/2;
         this.vx=Math.random() *0.2 +0.1;//randomizing the speed of worms to the left of canvas
+    }
+    draw(){
+        ctx.save();
+        ctx.globalAlpha = 0.5;
+        super.draw(ctx);
+        //ctx.globalAlpha = 1;//after drawing my ghost I set it back to 1 as it affects the entire ctx but it's better to use a .save and .restore 
+        ctx.restore();
     }
 }
 
