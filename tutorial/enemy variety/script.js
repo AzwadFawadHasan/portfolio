@@ -121,6 +121,15 @@ class Ghost extends Enemy {
         this.width=this.spriteWidth/2;
         this.height=this.spriteHeight/2;
         this.vx=Math.random() *0.2 +0.1;//randomizing the speed of worms to the left of canvas
+        this.angle=0;  
+        this.curve = Math.random() *3; 
+    }
+    update(deltaTime){
+
+        super.update(deltaTime);
+        this.y+=Math.sin(this.angle) * this.curve;//curve of ghosts movement pattern
+        this.angle+=0.04;//curve of ghosts
+
     }
     draw(){
         ctx.save();
