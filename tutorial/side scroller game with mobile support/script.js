@@ -120,7 +120,7 @@ class Player{
 
 
     }
-    update(input, deltaTime, enemeies){
+    update(input, deltaTime, enemies){
         //collision detections
         enemies.forEach(enemy => {
             //collision detection betn player circle hitbox and enemy circlehitbox
@@ -157,7 +157,11 @@ class Player{
             this.speed=-5;
         }
         else if((input.keys.indexOf('ArrowUp') > -1) || ((input.keys.indexOf('swipe up') ) > -1) && (this.onGround()) ){
-            this.vy+=-3;
+            if((input.keys.indexOf('swipe up') ) > -1){this.vy+=-35;}
+            else{
+                this.vy+=-13;
+            }
+            
         }   
         else{
             this.speed=0;
@@ -309,7 +313,7 @@ function displayStatusText(context){//gonna display the score
         context.fillStyle = 'red';
         context.fillText('GAME OVER hahahah! Press Enter', (canvas.width/2 -2), (canvas.height/2 -2));
         context.fillStyle = 'black';
-        context.fillText('GAME OVER hahahah!  Press Enter', canvas.width/2, canvas.height/2);
+        context.fillText('GAME OVER hahahah! Press Enter', (canvas.width/2 ), (canvas.height/2 ));
     }
 }
 
