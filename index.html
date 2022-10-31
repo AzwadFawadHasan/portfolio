@@ -4,193 +4,383 @@
     <head>
         <meta charset="UTF-8"><!--specifing the character encoding for html document-->
         <meta name = "viewport" content="width=device-width, initial-scale=1.0">
-        <title>Azwad's Portfolio website</title>
+        <title>Azwad's Portfolio</title>
         <link ref="stylesheet" 
         href ="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">    <!--this is a css file that normalizes any differences between different browsers-->
-
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+       
     </head>
     <body>
-        
-        <header>
-            <div class = "logo">
-                <img src = "img/devjane.png" alt="">
-            </div>
-            <button class = "nav-toggle" aria-label="toggle navigation">
-                <span class = "hamburger"></span>
-            </button>
-            <nav class = "nav">
-                <ul class="nav__list">
-                    <li class="nav__item"><a href="#home" class="nav__link">home</a></li>
-                    <li class="nav__item"><a href="#services" class="nav__link">My Services</a></li>
-                    <li class="nav__item"><a href="#aboutme" class="nav__link">About me</a></li>
-                    <li class="nav__item"><a href="#mywork" class="nav__link">My Work</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <!--Introduction-->
-        <section class="intro" id ="home">
-            <h1 class = "section__title section__title--intro">
-                Hi, I am <strong>Azwad Fawad Hasan</strong>
-            </h1>
-            <p class="section__subtitle section__subtitle--intro">CSE student</p>
-            <img src="img/dev-jane-01.jpg" alt ="a picture of dev jane smiling">
-        </section>
-        
-        <!--My services-->
-        <section class="my-services" id ="services">
-            <h2 class="section__title section__title--services">
-                What can I do
-            </h2>
-            <div class="services">
-                <div class="service">
-                    <h3>
-                        Tutoring
-                    </h3>
-                    
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.
-                    </p>
-                </div>
-                <div class="service">
-                    <h3>
-                        Coding
-                    </h3>
-                    
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.
-                    </p>
-                </div>
-                <div class="service">
-                    <h3>
-                        Designing
-                    </h3>
-                    
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.
-                    </p>
-                </div>
-
-            </div>
-           
-            <a href="#work" class="btn">My Work</a>
-        
-        </section>
-          <!--About me-->
-          <section class="about-me" id ="aboutme">
-            <h2 class="section__title section__title--about">
-                Who am I
-            </h2>
-            <p class="section__subtitle section__subtitle--about"></p>
-            
-            <div class="about-me__body">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                </p>
-            </div>
-            <img src="img/dev-jane-02.jpg" alt="2nd image">
-
-        <!--My work-->
-        </section class="my-work" id ="work">
-            <h2 class="section__title"> MY WORK</h2> 
-            <p class="section__subtitle">
-            
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                
-            </p>
-            
-            <div class="portfolio">
-                <!--Portfolio Item 1-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-01.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-                <!--Portfolio Item 2-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-02.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-                <!--Portfolio Item 3-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-03.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-                <!--Portfolio Item 4-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-04.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-                <!--Portfolio Item 5-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-05.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-                <!--Portfolio Item 6-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-06.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-                <!--Portfolio Item 7-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-07.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-                <!--Portfolio Item 8-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-08.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-                <!--Portfolio Item 9-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-09.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-                <!--Portfolio Item 10-->
-                <a href="#" class="portfolio_item">
-                    <img src="img/portfolio-10.jpg" alt="#" class = "portfolio__img">
-
-                </a>
-            </div>
+        <!--Starting Cv-->
         <section>
+          
 
-        <!--footer-->
-        <footer>
-            <a href="mailto:azwadfawadhasan@gmail.com" class="footer__link">azwadfawadhasan@gmail.com</a>
-            <ul class = "social-list">
-                <li class="social-list__item">
-                    <a class="social-list__link" href="facebook.com">facebook/azwad</a>
-                </li> 
-                <li class="social-list__item">
-                    <a class="social-list__link" href="facebook.com">facebook/azwad</a>
-                </li> 
-                <li class="social-list__item">
-                    <a class="social-list__link" href="facebook.com">facebook/azwad</a>
-                </li> 
-                <li class="social-list__item">
-                    <a class="social-list__link" href="facebook.com">facebook/azwad</a>
-                </li> 
-            </ul>
-        </footer>
+                <br>
+                <h1>
+                    Hi, I am <b><strong>Azwad Fawad Hasan</strong></b>
+                    <a href="https://www.linkedin.com/in/azwad-fawad-hasan-369170217">
+                        <img src="AzwadFawadHasan_photo.jpg" alt="#" style="float:right;width:40px;height:40px"> 
+                    </a>
+                </h1>
+               
+                <h3>
+                    A Computer Science And Engineering Student
+                </h3>
+              
+                  
+                
+            </div>
+            <div>
+                <br>
+                <h1>
+                   <b> EXPERIENCE</b>
+                </h1>
+                <h2>
+                    Student On Duty at IUB- Admission and Financial Aid Office
+                </h2>
+                <h3>Work details</h3>
+                <li>
+                    Greet guests, students and parents with superb customer service
+by providing them answers to their queries and solutions to any
+problem they are facing related to Undergraduate Admission and
+Scholarships.
+                </li>
+                <li>
+                    Answer all client questions and incoming calls. Redirect phone
+calls to the appropriate department and take down messages.
+Ensure the front desk is neat, presentable, and equipped with all
+the necessary supplies such as university prospectus, financial
+aid forms and papers.
+                </li>
+                <li>
+                    Determining admissibility, transferability of credit, and waiver for
+new and readmitted undergraduate students and assisting the
+whole admission and financial aid office team.
+                </li>
+            </div>
+            <div>
+                <h2>
+                    Edge Ambassador
+                    At
+                   <b>The Business Standard</b> 
+
+                </h2>
+                <h3>Work details</h3>
+                <li>
+                    Support the corporation by creating and uploading content that
+encourages the public to engage with their products and services
+                </li>
+                <li>
+                    Increasing the reach of the company and its various events products by partnering up with different University and College clubs.
+                </li>
+                
+
+            </div>
+
+            <div>
+               
+                <br>
+                <h1>EDUCATION</h1>
+
+                <li>Currently pursuing <b>B.Sc. in Computer Science and Engineering </b>[CGPA- 3.79, Earned credits-89]</li>
+                <li>
+                   Completed Pearson Edexcel International Advanced Levels <b>(A levels/ IAL)</b> from Academia
+                   <ol>
+                       <li>Physics---------------------------------------------- A</li>
+                       <li>
+                        Chemistry-------------------------------------------A
+                      </li>
+                      <li>
+                       Mathematics----------------------------------------A
+                      </li>
+                   </ol> 
+                   
+                    
+                </li>
+                <li>
+                    Completed  Pearson Edexcel <b>International GCSEs (O levels/ IGCSE)</b> from Academia (In one sitting)
+                    <table style="width:50%">
+                        <tr>
+                          <th>Subjects Given</th>
+                          <th>Results Obtained</th>
+                          
+                        </tr>
+                        <tr>
+                          
+                          <td>English</td>
+                          <td>A*</td>
+                          
+                        </tr>
+                        <tr>
+                            <td>Bangla</td>
+                            <td>A*</td>
+                        </tr>
+                        <tr>
+                            <td>Maths B</td>
+                            <td>A*</td>
+                        </tr>
+                        <tr>
+                            <td>Pure Mathematics</td>
+                            <td>A*</td>
+                        </tr>
+                        <tr>
+                            <td>Physics</td>
+                            <td>A*</td>
+                        </tr>
+                        <tr>
+                            <td>Chemistry</td>
+                            <td>A*</td>
+                        </tr>
+                        <tr>
+                            <td>Biology</td>
+                            <td>A*</td>
+                        </tr>
+                        <tr>
+                            <td>Human Biology</td>
+                            <td>A*</td>
+                        </tr>
+                      </table>
+                </li>
+            </div>
+            <div>
+                <h1>Achievements</h1>
+                <section>
+                    <ol>
+                       
+                        <li><b>Vice Chancellor’s List 2020</b></li>
+                        <p>
+                            Got placed into the Vice Chancellor’s
+List 2020 in 2021 for attaining a CGPA
+of 3.50 or more in the third successive
+semester.
+                        </p>
+                        <li><b>Ranked among the Top teams in
+                            Innovate For Bangladesh Student
+                            Competition- 2021</b></li>
+                        <p>
+                            My innovation idea for efficiently recycling waste products in difficult times
+like Covid-19 pandemic, got shortlisted
+for the final round from several thousand other ideas submitted by students all over the country. Innovate for
+Bangladesh Student Competition was
+organised by Bangladesh Innovation
+Conclave
+                        </p>
+                        
+                        <li><b>Got into Dean’s List 2020 </b></li>
+                        <p>
+                            For attaining a CGPA of 3.50 or more
+in any semester.
+                        </p>
+                        <li><b>Dean’s Honour List 2020</b></li>
+                        <p>
+                            For attaining a CGPA of 3.76 or more
+in the second successive semester
+                        </p>
+                        <li><b>The Daily Star Award 2020</b>
+                        </li>
+                        <p>
+                            Achieved the The Daily Star Award
+in 2020 for passing Alevels with flying colours in 2019 from the famous
+Bangladeshi editor and publisher Mahfuz Anam
+                        </p>
+                        <li><b>The Change Maker Awards 2019</b></li>
+                        <p>
+                            Received the The Change Maker
+Award in 2019 from The Honorable
+Speaker of Bangladesh Parliament,
+Shirin Sharmin Chaudhury, for having
+one of the country’s best IGCSE result
+in 2017
+                        </p>
+                        <li><b>The Daily Star Award 2018</b></li>
+                        <p>
+                            Obtained for stellar IGCSE result from
+the famous Bangladeshi journalist
+Mahfuz Anam
+                        </p>
+                        <li><b>Obtained 100% Merit Scholarship
+                            from IUB</b></li>
+                        <p>
+                            Obtained full scholarship for being Top
+                            5% scorer of selected candidates in
+                            Spring 2020 Admission Test
+                        </p>
+                        <li><b>Pearson Edexcel High Achievers
+                            Awards 2017</b></li>
+                        <p>
+                            Obtained from Barbara Wickham, Director Bangladesh, British Council and
+Derek Richardson, Vice PresidentPearson, UK, for IGCSE
+                        </p>
+                    </ol>
+                </section>
+
+                <h1>Projects</h1>
+                <section>
+                    <ol>
+                    
+                        <li><a href="https://azwadfawadhasan.github.io/openTheDoor/"><b>openTheDoor</b></a></li>
+                        <p>
+                            <div>
+                                <img src="img//projects//openTheDoor//openTheDoor1.PNG" alt="openTheDoor1.PNG" style="width:auto;height:240px">
+                                <img src="img//projects//openTheDoor//openTheDoor2.PNG" alt="openTheDoor1.PNG" style="width:auto;height:240px"> 
+                                <img src="img//projects//openTheDoor//openTheDoor3.PNG" alt="openTheDoor1.PNG" style="width:auto;height:240px">  
+                            
+                            </div>
+                            <div> this is a multi-room platformer created using vanilla js. The animations where created using GSAP JavaScript library</div>
+                            <div><a href="https://github.com/AzwadFawadHasan/openTheDoor/">openTheDoor Github Link</a></div>
+                        </p>
+
+                        <li><a href="https://azwadfawadhasan.github.io/openTheDoor/"><b>openTheDoor</b></a></li>
+                        <p>
+                            <div>
+                                <img src="img//projects//HornPolice//hornPolice1.PNG" alt="openTheDoor1.PNG" style="width:auto;height:244px">
+                                <img src="img//projects//HornPolice//hornPolice3.PNG" alt="openTheDoor1.PNG" style="width:auto;height:212px"> 
+                                <img src="img//projects//HornPolice//hornPolice2.PNG" alt="openTheDoor1.PNG" style="width:auto;height:234px"> 
+                                
+                            
+                            </div>
+                            <div> a project created with my teammates for my cse307 system analysis and design course. HornPolice is a mobile app that detects horn sounds and based on the location of the car it awards or fines the user for the horn sound</div>
+                            <div><a href="https://github.com/AzwadFawadHasan/HornPolice">HornPolice Github Link</a></div>
+                        </p>
+                    </p>
+
+                    <li><a href="https://azwadfawadhasan.github.io/jumpMilo/"><b>jumpMilo</b></a></li>
+                    <p>
+                        <div>
+                            <img src="img//projects//jumpMilo/jumpMilo3.jpg" alt="openTheDoor1.PNG" style="width:auto;height:244px">
+                            <img src="img//projects//jumpMilo/jumpMilo1.PNG" alt="openTheDoor1.PNG" style="width:auto;height:244px"> 
+                            <img src="img//projects//jumpMilo/jumpMilo2.PNG" alt="openTheDoor1.PNG" style="width:auto;height:244px"> 
+                            
+                        
+                        </div>
+                        <div> jumpMilo is A mobile/web game made using JavaScript. The goal is to avoid as many ghost worms as you can!A side scrolling game made using spritesheet images, js, html and css. It supports mobile devices.</div>
+                        <div><a href="https://github.com/AzwadFawadHasan/jumpMilo">HornPolice Github Link</a></div>
+                    </p>
+
+                    <li><a href="https://azwadfawadhasan.github.io/pointAndShootGame/"><b>pointAndShootGame</b></a></li>
+                    <p>
+                        <div>
+                            <img src="img//projects//pointAndShootGame/pointAndShootGame3.jpg" alt="openTheDoor1.PNG" style="width:450px;height:244px">
+                            <img src="img//projects//pointAndShootGame/pointAndShootGame2.jpg" alt="openTheDoor1.PNG" style="width: 450px;height:244px"> 
+                            <img src="img//projects//pointAndShootGame/pointAndShootGame.jpg" alt="openTheDoor1.PNG" style="width:450px;height:244px"> 
+                            
+                        
+                        </div>
+                        <div> a simple point and shoot game made using vanilla JavaScript. Sprite Images were used to create animations of the game characters present.</div>
+                        <div><a href="https://github.com/AzwadFawadHasan/pointAndShootGame">pointAndShootGame Github Link</a></div>
+                    </p>
+
+                    <li><a href="https://azwadfawadhasan.github.io/Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay/"><b>Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay</b></a></li>
+                    <p>
+                        <div>
+                            <img src="img//projects//Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay//a1.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x">
+                            <img src="img//projects//Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay/a2.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x"> 
+                            <img src="img//projects//Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay/a3.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x"> 
+                            <img src="img//projects//Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay/a4.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x"> 
+                            <img src="img//projects//Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay/a5.jpg" alt="openTheDoor1.PNG" style="width:269px;height:350x"> 
+                            <img src="img//projects//Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay/a6.jpg" alt="openTheDoor1.PNG" style="width:550px;height:550x"> 
+                            <img src="img//projects//Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay/a7.jpg" alt="openTheDoor1.PNG" style="width:240px;height:250x"> 
+                            <img src="img//projects//Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay/a8.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x"> 
+                            
+                            
+                        
+                        </div>
+                        <div>This is a simulation of a reconditioned car seller's operation in Bangladesh. This was made using java, java Fxml and Scene Builder</div>
+                        <div><a href="https://github.com/AzwadFawadHasan/Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq-s_Bay">Simulating_Operations_Of_A_Reconditioned_Car_Importer_Such_Like_Haq Github Link</a></div>
+                    </p>
+
+                    <li><a href="https://github.com/AzwadFawadHasan/AirQualityIndex_dbmsProject"><b>AirQualityIndex_dbmsProject</b></a></li>
+                    <p>
+                        <div>
+                            <img src="img//projects//AirQualityIndex_dbmsProject//aqms1.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x">
+                            <img src="img//projects//AirQualityIndex_dbmsProject//aqms2.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x">
+                            <img src="img//projects//AirQualityIndex_dbmsProject//aqms3.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x">
+                            <img src="img//projects//AirQualityIndex_dbmsProject//aqms4.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x">
+                            <img src="img//projects//AirQualityIndex_dbmsProject//aqms5.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x">
+                            <img src="img//projects//AirQualityIndex_dbmsProject//aqms6.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x">
+                            <img src="img//projects//AirQualityIndex_dbmsProject//aqms7.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x">
+                            <img src="img//projects//AirQualityIndex_dbmsProject//aqms8.jpg" alt="openTheDoor1.PNG" style="width:340px;height:250x">
+                            
+                            
+                            
+                        
+                        </div>
+                        <div>This is a website that shows the Air Quality of different districts of Bangladesh. Dataset from csv files were uploaded into MySQL database. The website was built using html, css, javascript, bootstrap, django and plotly python(for graphs)</div>
+                        <div><a href="https://github.com/AzwadFawadHasan/AirQualityIndex_dbmsProject">AirQualityIndex_dbmsProject Github Link</a></div>
+                    </p>
+                    
+                    <li><a href="https://github.com/AzwadFawadHasan/Maze_SolverBot_ArduinoProject"><b>Maze_SolverBot_ArduinoProject</b></a></li>
+                    <p>
+                        <div>
+                            <img src="img//projects//Maze_SolverBot_ArduinoProject//a2.jpg" alt="openTheDoor1.PNG" style="width:auto;height:250x">
+                            <img src="img//projects//Maze_SolverBot_ArduinoProject//bot1.jpg" alt="openTheDoor1.PNG" style="width:auto;height:250x">
+                            
+                            
+                        
+                        </div>
+                        <div> A maze following robot was built using adruino uno, ultrasonic sensor and servo motor</div>
+                        <div><a href="https://github.com/AzwadFawadHasan/Maze_SolverBot_ArduinoProject">Maze_SolverBot_ArduinoProject Github Link</a></div>
+                    </p>
+
+                    <li><a href="https://github.com/AzwadFawadHasan/ToDoList"><b>ToDoList</b></a></li>
+                    <p>
+                        <div>
+                            <img src="img//projects//toDoList/toDoList.jpg" alt="openTheDoor1.PNG" style="width:250px;height:250x">
+                            <img src="img//projects//toDoList/toDoList2.jpg" alt="openTheDoor1.PNG" style="width:250px;height:250x">
+                            <img src="img//projects//toDoList/toDoList3.jpg" alt="openTheDoor1.PNG" style="width:250px;height:250x">
+                            <img src="img//projects//toDoList/toDoList4.jpg" alt="openTheDoor1.PNG" style="width:250px;height:250x">
+                            <img src="img//projects//toDoList/toDoList6.jpg" alt="openTheDoor1.PNG" style="width:250px;height:250x">
+                            <img src="img//projects//toDoList/toDoList5.jpg" alt="openTheDoor1.PNG" style="width:250px;height:250x">
+                            
+                            
+                            
+                        
+                        </div>
+                        <div> A maze following robot was built using adruino uno, ultrasonic sensor and servo motor</div>
+                        <div><a href="https://github.com/AzwadFawadHasan/Maze_SolverBot_ArduinoProject">Maze_SolverBot_ArduinoProject Github Link</a></div>
+                    </p>
+                        
+                    </ol>
+                </section>
+
+            </div>
+            <div>
+               
+            </div>
+            <div>
+                <h1>Where can you find me?  </h1>
+                <pre class="center">
+                    /                                                \
+                    |    _________________________________________     |
+                    |   |                                         |    |
+                    |   |  C:\> _                                 |    |
+                    |   |                                         |    |
+                    |   |  Where can you find me?                 |    |
+                    |   |   github-> https://cutt.ly/nJYKluf      |    |
+                    |   |   linkdn-> https://cutt.ly/LJYKa6m      |    |
+                    |   |   mobile-> 01841531853                  |    |
+                    |   |   email-> azwadfawadhasan@gmail.com     |    |
+                    |   |                                         |    |
+                    |   |                                         |    |
+                    |   |                                         |    |
+                    |   |                                         |    |
+                    |   |                                         |    |
+                    |   |_________________________________________|    |
+                    |                                                  |
+                     \_________________________________________________/
+                            \___________________________________/
+                         ___________________________________________
+                      _-'    .-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.  --- `-_
+                   _-'.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.  .-.-.`-_
+                _-'.-.-.-. .---.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-`__`. .-.-.-.`-_
+             _-'.-.-.-.-. .-----.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-----. .-.-.-.-.`-_
+          _-'.-.-.-.-.-. .---.-. .-------------------------. .-.---. .---.-.-.-.`-_
+         :-------------------------------------------------------------------------:
+         `---._.-------------------------------------------------------------._.---'
+                                       
+                </pre>
+                
+        </section>
     </body>
 </html> 
